@@ -2,11 +2,11 @@ import React from 'react';
 
 export default props => {
   return (
-    <div class="agent-info">
-      <div class="realtor-img-wrapper">
+    <div className="agent-info">
+      <div className="realtor-img-wrapper">
         <img src="./assets/realtor.jpg" alt="" />
       </div>
-      <div class="company-description">
+      <div className="company-description">
         Thanks to our global network and stellar reputation, RE/MAX is the industry leader in competitive advantages for
         anybody
         buying or selling their home. When you look for the highest quality real estate service, look no further than a
@@ -17,8 +17,13 @@ export default props => {
         of
         your questions. RE/MAX Associates are The Real Estate Leaders® you can always depend on.
     </div>
-      <div class="facebook-icon-wrapper">
-        <i class="fab fa-2x fa-facebook-f"></i>
+      <div className="contact-links">
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+          <i className="fab fa-2x fa-facebook-f"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <i className="fab fa-2x fa-linkedin"></i>
+        </a>
       </div>
     </div>
   )
