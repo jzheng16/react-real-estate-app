@@ -1,52 +1,6 @@
 // Changes XML to JSON
 // Modified version from here: http://davidwalsh.name/convert-xml-json
-const xmlToJson = xml => {
-
-  // Create the return object
-  var obj = {};
-
-  if (xml.nodeType == 1) { // element
-    // do attributes
-    if (xml.attributes.length > 0) {
-      obj["@attributes"] = {};
-      for (var j = 0; j < xml.attributes.length; j++) {
-        var attribute = xml.attributes.item(j);
-        obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
-      }
-    }
-  } else if (xml.nodeType == 3) { // text
-    obj = xml.nodeValue;
-  }
-
-  // do children
-  // If just one text node inside
-  if (xml.hasChildNodes() && xml.childNodes.length === 1 && xml.childNodes[0].nodeType === 3) {
-    obj = xml.childNodes[0].nodeValue;
-  }
-  else if (xml.hasChildNodes()) {
-    for (var i = 0; i < xml.childNodes.length; i++) {
-      var item = xml.childNodes.item(i);
-      var nodeName = item.nodeName;
-      if (typeof (obj[nodeName]) == "undefined") {
-        obj[nodeName] = xmlToJson(item);
-      } else {
-        if (typeof (obj[nodeName].push) == "undefined") {
-          var old = obj[nodeName];
-          obj[nodeName] = [];
-          obj[nodeName].push(old);
-        }
-        obj[nodeName].push(xmlToJson(item));
-      }
-    }
-  }
-  return obj;
-}
-
-
-
-// Changes XML to JSON
-// Modified version from here: http://davidwalsh.name/convert-xml-json
-export const xmlToJson1 = xml => {
+const convertXMLToJson = xml => {
   // Create the return object
   let obj = {};
 
@@ -72,14 +26,14 @@ export const xmlToJson1 = xml => {
       const item = xml.childNodes.item(i);
       const nodeName = item.nodeName;
       if (typeof (obj[nodeName]) === 'undefined') {
-        obj[nodeName] = xmlToJson(item);
+        obj[nodeName] = convertXMLToJson(item);
       } else {
         if (typeof (obj[nodeName].push) === 'undefined') {
           const old = obj[nodeName];
           obj[nodeName] = [];
           obj[nodeName].push(old);
         }
-        obj[nodeName].push(xmlToJson(item));
+        obj[nodeName].push(convertXMLToJson(item));
       }
     }
   }
@@ -88,5 +42,5 @@ export const xmlToJson1 = xml => {
 
 
 
-export default xmlToJson;
+export default convertXMLToJson;
 

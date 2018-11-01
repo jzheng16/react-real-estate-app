@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import convertXMLtoJson, { xmlToJson1 } from '../../utilities/convertXMLToJson';
+import convertXMLtoJson from '../../utilities/convertXMLToJson';
 
 class PropertySearch extends Component {
   constructor(props) {
@@ -19,13 +19,13 @@ class PropertySearch extends Component {
     axios('/deepsearch')
       .then(response => {
         const xmlDOM = new DOMParser().parseFromString(response.data, 'text/xml');
-        console.log(xmlToJson1(xmlDOM));
+        console.log(convertXMLtoJson(xmlDOM));
       })
       .catch(err => console.log('error', err));
     axios('/jamaica')
       .then(response => {
         const xmlDOM = new DOMParser().parseFromString(response.data, 'text/xml');
-        console.log(xmlToJson1(xmlDOM));
+        console.log(convertXMLtoJson(xmlDOM));
       })
       .catch(err => console.log('error', err));
   }
