@@ -52,7 +52,9 @@ class Navbar extends Component {
               <a href="./market-trends.html">MARKET TRENDS</a>
             </li>
             <li>
+
               <a href="/profile">ABOUT ME</a>
+
             </li>
             <li>
               <a href="./contact.html">CONTACT</a>
