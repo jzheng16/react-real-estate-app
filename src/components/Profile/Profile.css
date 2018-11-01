@@ -1,0 +1,16 @@
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.profile-picture {
+  width: 10em;
+  height: 10em;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin: 0 auto;
+  background-image: url('../../assets/realtor.jpg');
+  background-size: cover;
+  background-position: 100%;
+  background-repeat: no-repeat;
+}

@@ -3,30 +3,30 @@ import React from 'react';
 
 export default props => {
   return (
-    <div class="banner">
-      <div class="banner-contents">
-        <div class="banner-header">
+    <div className="banner">
+      <div className="banner-contents">
+        <div className="banner-header">
           YOUR NEW HOME IS WAITING
       </div>
-        <div class="banner-icons">
-          <div class="icon-wrapper">
-            <i class="fas fa-3x fa-chart-bar"></i>
+        <div className="banner-icons">
+          <div className="icon-wrapper">
+            <i className="fas fa-3x fa-chart-bar"></i>
           </div>
-          <div class="icon-wrapper">
-            <i class="fas fa-3x fa-home"></i>
+          <div className="icon-wrapper">
+            <i className="fas fa-3x fa-home"></i>
           </div>
-          <div class="icon-wrapper">
-            <i class="fas fa-3x fa-mobile-alt"></i>
+          <div className="icon-wrapper">
+            <i className="fas fa-3x fa-mobile-alt"></i>
           </div>
         </div>
-        <div class="home-finder-wrapper">
-          <div class="home-finder-text">
+        <div className="home-finder-wrapper">
+          <div className="home-finder-text">
             FIND MY HOME
         </div>
-          <div class="home-finder-searchbox">
-            <form class="home-finder-form">
-              <input class="home-finder-input" type="text" />
-              <button class="home-finder-button">
+          <div className="home-finder-searchbox">
+            <form className="home-finder-form">
+              <input className="home-finder-input" type="text" />
+              <button className="home-finder-button">
                 SEARCH
             </button>
             </form>
