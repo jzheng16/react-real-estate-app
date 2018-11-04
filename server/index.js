@@ -30,18 +30,20 @@ app.get('/search', function (req, res) {
 app.get('/deepsearch', function (req, res) {
   console.log('deep search');
 
-  axios.get(`http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=16522+78+Ave&citystatezip=Flushing%2C+Ny`)
+  axios.get(`http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=20402+Northern+Blvd&citystatezip=Bayside%2C+NY`)
     .then(response => res.send(response.data))
     .catch(err => console.log(err));
 });
 
-app.get('/jamaica', (req, res) => {
-  console.log('jamaica');
-  axios.get(`http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=16607+81+Ave&citystatezip=Jamaica%2C+Ny`)
+app.get('/searchproperty', (req, res) => {
+
+  axios.get(`http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=7821+Woodhaven+Blvd&citystatezip=11385`)
     .then(response => res.send(response.data))
     .catch(err => console.log(err));
 
 })
+
+
 
 
 app.listen(process.env.PORT || 8080);

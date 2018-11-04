@@ -1,6 +1,7 @@
 import React from 'react';
 import './Profile.css';
 
+
 export default props => (
   <div>
     <h1>Mindy Maximus</h1>
