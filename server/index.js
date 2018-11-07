@@ -22,7 +22,7 @@ app.get('/ping', function (req, res) {
 app.get('/search', function (req, res) {
   console.log('hey');
 
-  axios.get(`http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=${API_KEY}&address=16522+78+Ave&citystatezip=Flushing%2C+Ny`)
+  axios.get(`http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=${API_KEY}&address=16522+78+Ave&citystatezip=Flushing%2C+Ny+11366`)
     .then(response => res.send(response.data))
     .catch(err => console.log(err));
 });
@@ -30,7 +30,8 @@ app.get('/search', function (req, res) {
 app.get('/deepsearch', function (req, res) {
   console.log('deep search');
 
-  axios.get(`http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=20402+Northern+Blvd&citystatezip=Bayside%2C+NY`)
+
+  axios.get(`http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=11329+122+Terrace&citystatezip=33778`)
     .then(response => res.send(response.data))
     .catch(err => console.log(err));
 });
@@ -38,6 +39,16 @@ app.get('/deepsearch', function (req, res) {
 app.get('/searchproperty', (req, res) => {
 
   axios.get(`http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=7821+Woodhaven+Blvd&citystatezip=11385`)
+    .then(response => res.send(response.data))
+    .catch(err => console.log(err));
+
+})
+
+app.get('/deepSearchResults/:address/:citystatezip', (req, res) => {
+
+  axios.get(
+    `http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=${req.params.address}&citystatezip=${req.params.citystatezip}`
+  )
     .then(response => res.send(response.data))
     .catch(err => console.log(err));
 
