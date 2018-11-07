@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import convertXMLtoJson from '../../utilities/convertXMLToJson';
-import LocationSearchInput from '../PlacesAutocomplete/PlacesAutocomplete';
+import PlacesAutocomplete from '../PlacesAutocomplete/PlacesAutocomplete';
 
 class PropertySearch extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: {} }
+    this.state = {
+      data: 'We are successfully passing this to our PlacesAutocomplete component!',
+      obj: { a: 2, b: 3 }
+
+    }
+    this.searchProperty = this.searchProperty.bind(this);
   }
 
   componentDidMount() {
@@ -27,13 +32,16 @@ class PropertySearch extends Component {
     console.log('Zipcode: ', event.target.zipcode.value);
     console.log('Street: ', event.target.streetaddress.value);
     console.log('State: ', event.target.state.value);
-    axios.get('/backend/city/address/zipcode/state')
+    //axios.get('/backend/city/address/zipcode/state')
   }
 
   render() {
+
+
     return (
       <div>
-        <LocationSearchInput />
+        <PlacesAutocomplete dog={this.state.data} cat={this.state.obj} />
+
         <form id="propertySearchForm" onSubmit={this.searchProperty}>
           Street: <input type="text" name="streetaddress" />
           City: <input type="text" name="city" />

@@ -1,10 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import convertXMLtoJson from '../../utilities/convertXMLToJson';
+import './PlacesAutocomplete.css';
+import convert from 'xml-js';
 
-class LocationSearchInput extends React.Component {
+
+
+
+class PlacesAutocomplete extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: '', place_location: '' };
+    this.state = { address: '', place_location: '', city: '', property: {} };
     this.searchZillow = this.searchZillow.bind(this);
 
   }
@@ -31,25 +37,41 @@ class LocationSearchInput extends React.Component {
     const formattedAddress = this.state.address.split(',');
     const streetAddress = formattedAddress[0];
     const formattedStreetAddress = streetAddress.replace('-', '');
-    console.log('Street address: ', streetAddress);
     const city = formattedAddress[1];
-    const formattedCity = city.replace(' ', '');
-    console.log('city:', formattedCity);
     const statezip = formattedAddress[2];
+    const formattedCity = city.replace(/' '/g, '');
+    console.log('city:', formattedCity.length);
+
     const formattedStateZip = statezip.replace(' ', '').split(' ');
-    const formattedState = formattedStateZip[0];
+    const formattedCityStateZip = formattedStateZip[0];
+    console.log('Street address: ', formattedStreetAddress);
+    console.log('formattedCityStateZip: ', formattedCityStateZip);
 
-    axios.get('')
+    const finalAddress = encodeURIComponent(formattedStreetAddress);
+    const finalCityStateZip = encodeURIComponent(formattedCity + ', ' + formattedCityStateZip)
+    console.log('Final address: ', finalAddress);
+    console.log('Final formattedCityStateZip: ', finalCityStateZip);
+    axios.get(`/deepSearchResults/${finalAddress}/${finalCityStateZip}`)
+      .then(response => {
 
-    // 165-22 78th Ave, Flushing, NY 11366, USA
-    // Zillow Address Format: &address=StreetAddress&citystatezip=City%2C+State
+        const xmlDOM = new DOMParser().parseFromString(response.data, 'text/xml');
+        const json = convert.xml2json(xmlDOM, { compact: true, spaces: 4 });
+        console.log(json);
 
+        this.setState = ({
+          property: json
+        })
+        console.log('What is my property state right now?', this.state.property);
+      })
+      .catch(err => console.log('error', err));
   }
 
 
 
 
   render() {
+
+
     return (
       <div>
         <div id='pac-container'>
@@ -57,9 +79,12 @@ class LocationSearchInput extends React.Component {
           <button onClick={this.searchZillow}> Search </button>
         </div>
 
+
+
+
       </div>
     );
   }
 }
 
-export default LocationSearchInput;
+export default PlacesAutocomplete;

@@ -3,6 +3,8 @@ import Routes from './routes';
 import Navbar from './components/Navbar';
 import Topstrip from './components/Topstrip';
 import Footer from './components/Footer';
+import Homepage from './Homepage';
+import PropertySearch from './components/PropertySearch/PropertySearch';
 
 class App extends Component {
   render() {
