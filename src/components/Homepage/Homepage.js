@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Banner from "./components/Banner";
-import AgentInfo from "./components/AgentInfo";
-import Slogan from "./components/Slogan";
-import FeaturedProperty from "./components/FeaturedProperty";
+import Banner from "../Banner";
+import AgentInfo from "../AgentInfo";
+import Slogan from "../Slogan";
+import FeaturedProperty from "../FeaturedProperty";
 
 import "./Homepage.css";
 

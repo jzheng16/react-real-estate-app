@@ -1,15 +1,14 @@
 import React from "react";
 import axios from "axios";
+import GoogleMapReact from "google-map-react";
+
 import convertXMLtoJson from "../../utilities/convertXMLToJson";
 import "./PlacesAutocomplete.css";
-import convert from "xml-js";
-import placeHolderImage from "../../assets/home1.jpg";
-import GoogleMapReact from "google-map-react";
 
 class PlacesAutocomplete extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: "", place_location: "", city: "", property: {} };
+    this.state = { address: "", place_location: "", city: "", property: {}, error: '' };
     this.searchZillow = this.searchZillow.bind(this);
   }
 
@@ -37,7 +36,6 @@ class PlacesAutocomplete extends React.Component {
     const city = formattedAddress[1];
     const statezip = formattedAddress[2];
     const formattedCity = city.replace(/' '/g, "");
-    console.log("city:", formattedCity.length);
 
     const formattedStateZip = statezip.replace(" ", "").split(" ");
     const formattedCityStateZip = formattedStateZip[0];
@@ -53,23 +51,22 @@ class PlacesAutocomplete extends React.Component {
     axios
       .get(`/deepSearchResults/${finalAddress}/${finalCityStateZip}`)
       .then(response => {
-        console.log(response);
-        const xmlDOM = new DOMParser().parseFromString(
-          response.data,
-          "text/xml"
-        );
-        const json = convert.xml2json(xmlDOM, { compact: true, spaces: 4 });
+        const xmlDOM = new DOMParser().parseFromString(response.data, "text/xml");
+        const json = convertXMLtoJson(xmlDOM);
         console.log(json);
+        if (json["SearchResults:searchresults"].response === undefined) {
+          this.setState({ error: json["SearchResults:searchresults"].message.text });
+          console.log('error: ', this.state.error);
 
-        this.setState = {
-          property: json
-        };
-        console.log(
-          "What is my property state right now?",
-          this.state.property
-        );
+        }
+        else {
+          this.setState({
+            property: json["SearchResults:searchresults"].response.results.result
+          });
+          console.log("What is my property state right now?", this.state.property);
+        }
       })
-      .catch(err => console.log("error", err));
+      .catch(err => console.log('Error processing zillow request', err));
   }
 
   render() {
