@@ -1,6 +1,6 @@
 import { Route, Switch, withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
-import Homepage from './Homepage';
+import Homepage from './components/Homepage/Homepage';
 
 import Profile from './components/Profile/Profile';
 import PropertySearch from './components/PropertySearch/PropertySearch';

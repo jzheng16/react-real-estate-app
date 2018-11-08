@@ -76,7 +76,7 @@ body {
 }
 
 .banner {
-  background-image: url("./assets/banner-img.jpg");
+  background-image: url("../../assets/banner-img.jpg");
   width: 100%;
   height: 95vh;
   background-size: cover;
@@ -187,7 +187,7 @@ body {
 }
 
 .slogan {
-  background: url("./assets/brickfacing.jpg");
+  background: url("../../assets/brickfacing.jpg");
   height: 300px;
   background-size: cover;
   background-position: 50% 50%;
@@ -212,7 +212,7 @@ body {
   padding-top: 130px;
 }
 .property-img {
-  background: url("./assets/home1.jpg");
+  background: url("../../assets/home1.jpg");
   height: 250px;
   background-size: cover;
   background-position: 50% 50%;
