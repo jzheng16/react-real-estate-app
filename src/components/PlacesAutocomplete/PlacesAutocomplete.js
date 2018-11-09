@@ -8,7 +8,7 @@ import "./PlacesAutocomplete.css";
 class PlacesAutocomplete extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: "", place_location: "", city: "", property: {}, error: '' };
+    this.state = { address: "", city: 'Miami', property: {}, error: '', propertyLng: 0, propertyLat: 0 };
     this.searchZillow = this.searchZillow.bind(this);
   }
 
@@ -21,9 +21,13 @@ class PlacesAutocomplete extends React.Component {
       let place = autoComplete.getPlace();
       console.log("What is place?", place);
       let location = place.geometry.location;
+      console.log(location.lat(), location.lng());
       this.setState({
         address: place.formatted_address,
-        place_location: location.toString()
+        propertyLng: location.lng(),
+        propertyLat: location.lat()
+
+
       });
     });
   }
@@ -64,6 +68,7 @@ class PlacesAutocomplete extends React.Component {
             property: json["SearchResults:searchresults"].response.results.result
           });
           console.log("What is my property state right now?", this.state.property);
+          console.log('WHat is my place location', this.state.place_location);
         }
       })
       .catch(err => console.log('Error processing zillow request', err));
@@ -85,7 +90,17 @@ class PlacesAutocomplete extends React.Component {
               }}
               defaultCenter={{ lat: 59.995, lng: 30.337 }}
               defaultZoom={11}
+              center={{ lng: this.state.propertyLng, lat: this.state.propertyLat }}
             />
+          </div>
+          <div>
+            <h1>{this.state.address}</h1>
+            <h2>Bathrooms {this.state.property.bathrooms}
+              Bedrooms {this.state.property.bedrooms}
+              Square Ft. {this.state.property.finishedSqFt}
+              {/* Zestimate {this.state.property.zestimate.amount} */}
+            </h2>
+
           </div>
         </div>
       </div>
