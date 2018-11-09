@@ -10,14 +10,10 @@ const { API_KEY } = require('../config');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Cors
-
+// Cors allows us to get resources from other servers
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/ping', function (req, res) {
-  return res.send('pong');
-});
 
 app.get('/search', function (req, res) {
   console.log('hey');
@@ -27,22 +23,6 @@ app.get('/search', function (req, res) {
     .catch(err => console.log(err));
 });
 
-app.get('/deepsearch', function (req, res) {
-  console.log('deep search');
-
-
-  axios.get(`http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=11329+122+Terrace&citystatezip=33778`)
-    .then(response => res.send(response.data))
-    .catch(err => console.log(err));
-});
-
-app.get('/searchproperty', (req, res) => {
-
-  axios.get(`http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=7821+Woodhaven+Blvd&citystatezip=11385`)
-    .then(response => res.send(response.data))
-    .catch(err => console.log(err));
-
-})
 
 app.get('/deepSearchResults/:address/:citystatezip', (req, res) => {
 
@@ -51,7 +31,6 @@ app.get('/deepSearchResults/:address/:citystatezip', (req, res) => {
   )
     .then(response => res.send(response.data))
     .catch(err => console.log(err));
-
 })
 
 
