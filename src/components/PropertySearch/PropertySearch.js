@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PlacesAutocomplete from "../PlacesAutocomplete/PlacesAutocomplete";
+import axios from "axios";
 
 class PropertySearch extends Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class PropertySearch extends Component {
   }
 
   componentDidMount() {
-
+    // axios.get()
   }
 
 
