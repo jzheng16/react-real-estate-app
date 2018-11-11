@@ -33,7 +33,14 @@ app.get('/deepSearchResults/:address/:citystatezip', (req, res) => {
     .catch(err => console.log(err));
 })
 
+app.get('/deepComparables/:zpid', (req, res) => {
 
+  axios.get(
+    `http://www.zillow.com/webservice/GetDeepComps.htm?zws-id=${API_KEY}&zpid=${req.params.zpid}&count=5`
+  )
+    .then(response => res.send(response.data))
+    .catch(err => console.log(err));
+})
 
 
 app.listen(process.env.PORT || 8080);

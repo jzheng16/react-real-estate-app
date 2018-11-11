@@ -5,9 +5,7 @@ import GoogleMapReact from "google-map-react";
 import convertXMLtoJson from "../../utilities/convertXMLToJson";
 import "./PlacesAutocomplete.css";
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+
 
 // const Wrapper = styled.div`
 //   position: absolute;
@@ -47,7 +45,7 @@ import styled from 'styled-components';
 class PlacesAutocomplete extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: "", property: {}, error: '', propertyLng: -75.4228, propertyLat: 39.9827 };
+    this.state = { address: '', property: {}, error: '', propertyLng: -75.4228, propertyLat: 39.9827, propertyZpid: 0 };
     this.searchZillow = this.searchZillow.bind(this);
   }
 
@@ -58,9 +56,8 @@ class PlacesAutocomplete extends React.Component {
 
     autoComplete.addListener("place_changed", () => {
       let place = autoComplete.getPlace();
-      console.log("What is place?", place);
+      // console.log("What is place?", place);
       let location = place.geometry.location;
-      console.log(location.lat(), location.lng());
       this.setState({
         address: place.formatted_address,
         propertyLng: location.lng(),
@@ -72,7 +69,6 @@ class PlacesAutocomplete extends React.Component {
   }
 
   searchZillow() {
-    console.log(this.state.address);
     const formattedAddress = this.state.address.split(",");
     const streetAddress = formattedAddress[0];
     const formattedStreetAddress = streetAddress.replace("-", "");
@@ -82,31 +78,41 @@ class PlacesAutocomplete extends React.Component {
 
     const formattedStateZip = statezip.replace(" ", "").split(" ");
     const formattedCityStateZip = formattedStateZip[0];
-    console.log("Street address: ", formattedStreetAddress);
-    console.log("formattedCityStateZip: ", formattedCityStateZip);
+    // console.log("Street address: ", formattedStreetAddress);
+    // console.log("formattedCityStateZip: ", formattedCityStateZip);
 
     const finalAddress = encodeURIComponent(formattedStreetAddress);
     const finalCityStateZip = encodeURIComponent(
       formattedCity + ", " + formattedCityStateZip
     );
-    console.log("Final address: ", finalAddress);
-    console.log("Final formattedCityStateZip: ", finalCityStateZip);
+    // console.log("Final address: ", finalAddress);
+    // console.log("Final formattedCityStateZip: ", finalCityStateZip);
     axios
       .get(`/deepSearchResults/${finalAddress}/${finalCityStateZip}`)
       .then(response => {
         const xmlDOM = new DOMParser().parseFromString(response.data, "text/xml");
         const json = convertXMLtoJson(xmlDOM);
-        console.log(json);
+        console.log('JSON: ', json);
         if (json["SearchResults:searchresults"].response === undefined) {
           this.setState({ error: json["SearchResults:searchresults"].message.text });
-          console.log('error: ', this.state.error);
+          console.log('Zillow API Call error: ', this.state.error);
 
         }
         else {
           this.setState({
-            property: json["SearchResults:searchresults"].response.results.result
+            property: json["SearchResults:searchresults"].response.results.result,
+            propertyZpid: json["SearchResults:searchresults"].response.results.result.zpid
           });
-          console.log("What is my property state right now?", this.state.property);
+          console.log("Property Information: ", this.state.property);
+          console.log("Property Zpid: ", this.state.propertyZpid);
+
+          axios.get(`/deepComparables/${this.state.propertyZpid}`)
+            .then(response => {
+              const xmlDOM = new DOMParser().parseFromString(response.data, "text/xml");
+              const comparables = convertXMLtoJson(xmlDOM);
+              console.log('comparables: ', comparables);
+            })
+
         }
       })
       .catch(err => console.log('Error processing zillow request', err));
@@ -132,18 +138,31 @@ class PlacesAutocomplete extends React.Component {
               defaultZoom={10}
               center={{ lng: propertyLng, lat: propertyLat }}
             >
-              <Marker lat={propertyLat} lng={propertyLng} />
             </GoogleMapReact>
           </div>
-          <div>
-            <h1>{address}</h1>
-            <h2>Bathrooms {property.bathrooms}
-              Bedrooms {property.bedrooms}
-              Square Ft. {property.finishedSqFt}
-              Zestimate {property.zestimate && property.zestimate.amount}
-            </h2>
 
-          </div>
+          {Object.keys(property).length !== 0 ?
+            <div className="property-information">
+              <h1>{address}</h1>
+              <h2>Bathrooms {property.bathrooms}
+                Bedrooms {property.bedrooms}
+                Square Ft. {property.finishedSqFt}
+                Year Built {property.yearBuilt}
+                Property Type {property.useCode}
+                Zestimate {property.zestimate && typeof property.zestimate.amount === 'number' && property.zestimate.amount}
+              </h2>
+              <a href={property.links && property.links.comparables} target="_blank" rel="noopener noreferrer"> Comparables </a>
+              <a href={property.links && property.links.graphsanddata} target="_blank" rel="noopener noreferrer"> Graphs And Data </a>
+              <a href={property.links && property.links.homedetails} target="_blank" rel="noopener noreferrer"> Home Details</a>
+              <a href={property.links && property.links.mapthishome} target="_blank" rel="noopener noreferrer">View Property</a>
+            </div>
+
+            :
+            <div> </div>
+
+          }
+
+
         </div>
       </div >
     );
