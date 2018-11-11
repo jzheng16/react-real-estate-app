@@ -5,10 +5,49 @@ import GoogleMapReact from "google-map-react";
 import convertXMLtoJson from "../../utilities/convertXMLToJson";
 import "./PlacesAutocomplete.css";
 
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+// const Wrapper = styled.div`
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   width: 18px;
+//   height: 18px;
+//   background-color: #000;
+//   border: 2px solid #fff;
+//   border-radius: 100%;
+//   user-select: none;
+//   transform: translate(-50%, -50%);
+//   cursor: ${props => (props.onClick ? 'pointer' : 'default')};
+//   &:hover {
+//     z-index: 1;
+//   }
+// `;
+
+// const Marker = props => (
+//   <Wrapper
+//     alt={props.text}
+//     {...props.onClick ? { onClick: props.onClick } : {}}
+//   />
+// );
+
+// Marker.defaultProps = {
+//   onClick: null,
+// };
+
+// Marker.propTypes = {
+//   onClick: PropTypes.func,
+//   text: PropTypes.string.isRequired,
+// };
+
+// export default Marker;
+
 class PlacesAutocomplete extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: "", city: 'Miami', property: {}, error: '', propertyLng: 0, propertyLat: 0 };
+    this.state = { address: "", property: {}, error: '', propertyLng: -75.4228, propertyLat: 39.9827 };
     this.searchZillow = this.searchZillow.bind(this);
   }
 
@@ -68,13 +107,15 @@ class PlacesAutocomplete extends React.Component {
             property: json["SearchResults:searchresults"].response.results.result
           });
           console.log("What is my property state right now?", this.state.property);
-          console.log('WHat is my place location', this.state.place_location);
         }
       })
       .catch(err => console.log('Error processing zillow request', err));
   }
 
   render() {
+
+    const { property, address, propertyLat, propertyLng } = this.state;
+
     return (
       <div>
         <div id="pac-container">
@@ -88,22 +129,23 @@ class PlacesAutocomplete extends React.Component {
               bootstrapURLKeys={{
                 key: "AIzaSyAN2A_sszCBA2Aymw3EMZKpubpRaOoQLk0"
               }}
-              defaultCenter={{ lat: 59.995, lng: 30.337 }}
-              defaultZoom={11}
-              center={{ lng: this.state.propertyLng, lat: this.state.propertyLat }}
-            />
+              defaultZoom={10}
+              center={{ lng: propertyLng, lat: propertyLat }}
+            >
+              <Marker lat={propertyLat} lng={propertyLng} />
+            </GoogleMapReact>
           </div>
           <div>
-            <h1>{this.state.address}</h1>
-            <h2>Bathrooms {this.state.property.bathrooms}
-              Bedrooms {this.state.property.bedrooms}
-              Square Ft. {this.state.property.finishedSqFt}
-              {/* Zestimate {this.state.property.zestimate.amount} */}
+            <h1>{address}</h1>
+            <h2>Bathrooms {property.bathrooms}
+              Bedrooms {property.bedrooms}
+              Square Ft. {property.finishedSqFt}
+              Zestimate {property.zestimate && property.zestimate.amount}
             </h2>
 
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 }
