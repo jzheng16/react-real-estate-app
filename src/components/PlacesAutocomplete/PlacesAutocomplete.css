@@ -17,8 +17,38 @@
   background-size: cover;
   background-position: 50% 50%;
 }
-
+.address {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 auto;
+  text-align: center;
+}
 #googleMap {
   height: 300px;
   width: 400px;
 }
+
+.property-information {
+ 
+  width: 80%;
+  margin: 2em auto;
+}
+
+.facts-at-a-glance {
+  
+}
+
+.row-1, .row-2 {
+  display: flex;
+  flex-flow: row nowrap; /* Align on the same line */
+  justify-content: space-between; /* Equal margin between the child elements */ 
+  margin: 1em 0; /* give some space between top and bottom of our facts and features */    
+}
+
+.bathMediaImg {
+  float: left;
+}
+
+/* .size-3 {
+  width: 33%;
+} */

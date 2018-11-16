@@ -3,49 +3,14 @@ import axios from "axios";
 import GoogleMapReact from "google-map-react";
 
 import convertXMLtoJson from "../../utilities/convertXMLToJson";
+import PropertyInformation from "./PropertyInformation";
 import "./PlacesAutocomplete.css";
 
-
-
-// const Wrapper = styled.div`
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   width: 18px;
-//   height: 18px;
-//   background-color: #000;
-//   border: 2px solid #fff;
-//   border-radius: 100%;
-//   user-select: none;
-//   transform: translate(-50%, -50%);
-//   cursor: ${props => (props.onClick ? 'pointer' : 'default')};
-//   &:hover {
-//     z-index: 1;
-//   }
-// `;
-
-// const Marker = props => (
-//   <Wrapper
-//     alt={props.text}
-//     {...props.onClick ? { onClick: props.onClick } : {}}
-//   />
-// );
-
-// Marker.defaultProps = {
-//   onClick: null,
-// };
-
-// Marker.propTypes = {
-//   onClick: PropTypes.func,
-//   text: PropTypes.string.isRequired,
-// };
-
-// export default Marker;
 
 class PlacesAutocomplete extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: '', property: {}, error: '', propertyLng: -75.4228, propertyLat: 39.9827, propertyZpid: 0 };
+    this.state = { address: '', estate: {}, error: '', propertyLng: -75.4228, propertyLat: 39.9827, propertyZpid: 0 };
     this.searchZillow = this.searchZillow.bind(this);
   }
 
@@ -100,7 +65,7 @@ class PlacesAutocomplete extends React.Component {
         }
         else {
           this.setState({
-            property: json["SearchResults:searchresults"].response.results.result,
+            estate: json["SearchResults:searchresults"].response.results.result,
             propertyZpid: json["SearchResults:searchresults"].response.results.result.zpid
           });
           console.log("Property Information: ", this.state.property);
@@ -120,7 +85,7 @@ class PlacesAutocomplete extends React.Component {
 
   render() {
 
-    const { property, address, propertyLat, propertyLng } = this.state;
+    const { estate, address, propertyLat, propertyLng } = this.state;
 
     return (
       <div>
@@ -140,31 +105,24 @@ class PlacesAutocomplete extends React.Component {
             >
             </GoogleMapReact>
           </div>
-
-          {Object.keys(property).length !== 0 ?
-            <div className="property-information">
-              <h1>{address}</h1>
-              <h2>Bathrooms {property.bathrooms}
-                Bedrooms {property.bedrooms}
-                Square Ft. {property.finishedSqFt}
-                Year Built {property.yearBuilt}
-                Property Type {property.useCode}
-                Zestimate {property.zestimate && typeof property.zestimate.amount === 'number' && property.zestimate.amount}
-              </h2>
-              <a href={property.links && property.links.comparables} target="_blank" rel="noopener noreferrer"> Comparables </a>
-              <a href={property.links && property.links.graphsanddata} target="_blank" rel="noopener noreferrer"> Graphs And Data </a>
-              <a href={property.links && property.links.homedetails} target="_blank" rel="noopener noreferrer"> Home Details</a>
-              <a href={property.links && property.links.mapthishome} target="_blank" rel="noopener noreferrer">View Property</a>
-            </div>
-
-            :
-            <div> </div>
-
-          }
-
-
         </div>
-      </div >
+        {Object.keys(estate).length !== 0 ?
+          <div>
+            <PropertyInformation estate={estate} address={address} />
+
+          </div>
+          :
+          <div> </div>
+
+        }
+
+        <i className="far fa-calendar"></i>
+        <i className="fas fa-bed"></i>
+        <i className="fas fa-expand-arrows-alt"></i>
+        <i className="fas fa-home"></i>
+        <i className="fas fa-expand"></i>
+      </div>
+
     );
   }
 }
