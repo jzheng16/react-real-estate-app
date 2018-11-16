@@ -5,7 +5,7 @@ import axios from "axios";
 class PropertySearch extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { data: { a: 1, b: 2 } };
 
   }
 
@@ -17,7 +17,7 @@ class PropertySearch extends Component {
   render() {
     return (
       <div>
-        <PlacesAutocomplete />
+        <PlacesAutocomplete data={this.state.data} />
       </div>
     );
   }
