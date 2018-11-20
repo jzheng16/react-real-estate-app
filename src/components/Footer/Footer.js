@@ -1,4 +1,5 @@
 import React from 'react';
+import './Footer.css';
 
 export default props => {
   return (
@@ -43,8 +44,8 @@ export default props => {
       <div className="disclosure">
         Each RE/MAX Office is Independently Owned and Operated. Equal Housing Opportunity.
       <br /> © 2018 Reliance Network and RE/MAX Pennsylvania &amp; Delaware. All rights reserved. U.S. Reg. Copyright
-                  TX-5-910-991,
-                  TX-5-910-992, TX-5-910-993, and TX-5-910-994. Equal Housing Opportunity.
+                    TX-5-910-991,
+                    TX-5-910-992, TX-5-910-993, and TX-5-910-994. Equal Housing Opportunity.
     </div>
       <img src="http://www.adriennecordova.com/Areas/CMS/Views/cms-templates/img/reliance-logo-white.png" alt="webdeveloper-logo" />
       <br />

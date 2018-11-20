@@ -3,7 +3,7 @@ import Routes from "./routes";
 
 import Navbar from "./components/Navbar";
 import Topstrip from "./components/Topstrip";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 
 class App extends Component {
   render() {
