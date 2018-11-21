@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-
+import axios from 'axios';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -21,12 +21,25 @@ class Login extends Component {
     console.log('What is my password state right now???', this.state.passwordState);
   }
 
+  onSubmit = (e) => {
+    e.preventDefault();
+    axios.post('/login', { email: this.state.emailState, password: this.state.passwordState })
+      .then(data => {
+        console.log('data', data.data)
+        axios.get('/hello')
+          .then(user => {
+            console.log(user.data)
+          })
+      })
+  }
+
   render() {
     return (
-      <form id="Login">
+      <form onSubmit={this.onSubmit} id="Login">
         Email: <input type="email" name="emailInput" onChange={this.onEmailChange} />
         {/* onChange will run every time the input Changes */}
         Password: <input type="password" name="passwordInput" onChange={this.onPasswordChange} />
+        <button type="Submit"> Login </button>
       </form>
     )
   }
