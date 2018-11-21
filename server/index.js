@@ -6,7 +6,6 @@ const axios = require('axios');
 const { API_KEY } = require('../config');
 const db = require('./db/index.js');
 const passport = require("passport");
-const localStrategy = require('./passportStrategy');
 const User = require('./db/models/user');
 const port = process.env.PORT || 5000;
 
@@ -65,22 +64,9 @@ app.post('/login', (req, res, next) => {
     .catch(next);
 });
 
-app.post('/user', (req, res) => {
-  console.log('req', req.user);
-  let user;
-  User.create({ email: 'x@x.com', password: '1234' })
-    .then(user => {
-      console.log('user');
-      res.json(user);
-    });
-});
+// Signup
+app.post('/signup', (req, res) => {
 
-app.get('/search', function (req, res) {
-  console.log('hey');
-
-  axios.get(`http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=${API_KEY}&address=16522+78+Ave&citystatezip=Flushing%2C+Ny+11366`)
-    .then(response => res.send(response.data))
-    .catch(err => console.log(err));
 });
 
 

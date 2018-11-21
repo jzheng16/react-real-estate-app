@@ -1,92 +1,10 @@
 import React from "react";
 import axios from "axios";
-import GoogleMapReact from "google-map-react";
 
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, StreetViewPanorama, OverlayView } from "react-google-maps"
-import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
-
-
-
-
+import { StreetView, StyledMapWithAnInfoBox } from './GoogleMapComponents';
 import convertXMLtoJson from "../../utilities/convertXMLToJson";
 import PropertyInformation from "./PropertyInformation";
 import "./PlacesAutocomplete.css";
-
-const API_KEY = 'AIzaSyAN2A_sszCBA2Aymw3EMZKpubpRaOoQLk0';
-const { compose, withProps, withStateHandlers } = require("recompose");
-
-
-const Welcome = props => (
-  <h1> Hello, {props.name} </h1>
-)
-
-
-const mapEnvironment = compose(
-  withProps({
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
-    mapElement: <div style={{ height: `100%` }} />
-  }),
-  withScriptjs,
-  withGoogleMap
-);
-
-const StreetViewLayout = props => (
-  <GoogleMap defaultZoom={8} >
-    <StreetViewPanorama position={{ lat: props.propertyLat, lng: props.propertyLng }} visible>
-    </StreetViewPanorama>
-  </GoogleMap >
-);
-
-const StreetView = mapEnvironment(StreetViewLayout);
-
-
-const StyledMapWithAnInfoBox = compose(
-  withProps({
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
-    center: { lat: 25.03, lng: 121.6 },
-  }),
-  withStateHandlers(() => ({
-    isOpen: false,
-  }), {
-      onToggleOpen: ({ isOpen }) => () => ({
-        isOpen: !isOpen,
-      })
-    }),
-  withScriptjs,
-  withGoogleMap
-)(props =>
-  <GoogleMap
-    defaultZoom={14}
-    defaultCenter={{ lat: props.propertyLat, lng: props.propertyLng }}
-    center={{ lat: props.propertyLat, lng: props.propertyLng }}
-
-  >
-    {props.isMarkerShown && (
-      <Marker position={{ lat: props.propertyLat, lng: props.propertyLng }} />
-    )}
-
-    <Marker
-      position={{ lat: props.propertyLat, lng: props.propertyLng }}
-      onClick={props.onToggleOpen}
-    >
-      {props.isInfoBoxShown && <InfoBox
-        onCloseClick={props.toggleInfoBox}
-        options={{ closeBoxURL: ``, enableEventPropagation: true }}
-      >
-        <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
-          <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
-            Hello, Kaohsiung!
-          </div>
-        </div>
-      </InfoBox>}
-    </Marker>
-  </GoogleMap>
-);
 
 
 
@@ -95,6 +13,8 @@ class PlacesAutocomplete extends React.Component {
     super(props);
     this.state = { address: '', estate: {}, error: '', isMarkerShown: false, isInfoBoxShown: false, propertyLng: -75.4228, propertyLat: 39.9827, propertyZpid: 0 };
     this.searchZillow = this.searchZillow.bind(this);
+    this.toggleMarkerInfoBox = this.toggleMarkerInfoBox.bind(this);
+
   }
 
   componentDidMount() {
@@ -104,7 +24,6 @@ class PlacesAutocomplete extends React.Component {
 
     autoComplete.addListener("place_changed", () => {
       let place = autoComplete.getPlace();
-      // console.log("What is place?", place);
       let location = place.geometry.location;
       this.setState({
         address: place.formatted_address,
@@ -115,6 +34,9 @@ class PlacesAutocomplete extends React.Component {
     });
   }
 
+  toggleMarkerInfoBox() {
+    this.setState({ isInfoBoxShown: !this.state.isInfoBoxShown });
+  }
 
   searchZillow() {
     const formattedAddress = this.state.address.split(",");
@@ -186,7 +108,7 @@ class PlacesAutocomplete extends React.Component {
         <div className="propertyDisplay">
           <StreetView propertyLat={propertyLat} propertyLng={propertyLng} />
           <div id="googleMap">
-            <StyledMapWithAnInfoBox propertyLat={propertyLat} propertyLng={propertyLng} isMarkerShown={isMarkerShown} isInfoBoxShown={isInfoBoxShown} />
+            <StyledMapWithAnInfoBox toggleMarkerInfoBox={this.toggleMarkerInfoBox} propertyLat={propertyLat} propertyLng={propertyLng} isMarkerShown={isMarkerShown} isInfoBoxShown={isInfoBoxShown} />
             {/* {...this.state} */}
           </div>
         </div>
