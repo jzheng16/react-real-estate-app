@@ -1,11 +1,13 @@
 import React, { Component } from "react"
 import axios from 'axios';
+
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = { emailState: "", passwordState: "" };
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.loggingIn = this.loggingIn.bind(this);
   }
 
   onEmailChange(event) {
@@ -21,26 +23,39 @@ class Login extends Component {
     console.log('What is my password state right now???', this.state.passwordState);
   }
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    axios.post('/login', { email: this.state.emailState, password: this.state.passwordState })
-      .then(data => {
-        console.log('data', data.data)
-        axios.get('/hello')
-          .then(user => {
-            console.log(user.data)
-          })
+  loggingIn(event) {
+    event.preventDefault();
+
+    axios
+      .post('/login', { email: this.state.emailState, password: this.state.passwordState })
+      .then(response => {
+        console.log(response.data)
+        if (typeof response.data === "object") {
+          // redirecting user to home page - later to saved properties
+
+        }
+        else {
+          this.setState({ error: response.data })
+        }
       })
   }
 
+
   render() {
     return (
-      <form onSubmit={this.onSubmit} id="Login">
-        Email: <input type="email" name="emailInput" onChange={this.onEmailChange} />
-        {/* onChange will run every time the input Changes */}
-        Password: <input type="password" name="passwordInput" onChange={this.onPasswordChange} />
-        <button type="Submit"> Login </button>
-      </form>
+      <div>
+        <form id="Login" onSubmit={this.loggingIn}>
+          Email: <input type="email" name="emailInput" onChange={this.onEmailChange} />
+          {/* onChange will run every time the input Changes */}
+          Password: <input type="password" name="passwordInput" onChange={this.onPasswordChange} />
+          <button type="Submit"> Login </button>
+
+        </form>
+        {this.state.error ? <div>{this.state.error}</div>
+          :
+          null
+        }
+      </div>
     )
   }
 }
