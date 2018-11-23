@@ -24,23 +24,6 @@ UserSchema.methods.serialize = function () {
   };
 };
 
-UserSchema.methods.validatePassword = function (password) {
-  console.log(password, this.password)
-  console.log(bcrypt.compare(password, this.password))
-  // bcrypt.compare(password, this.password)
-  //   .then(response => {
-  //     console.log('response', response);
-  //     return response;
-  //   })
-  //   .catch(err => console.error('cannot compare', err));
-  return password === this.password;
-};
-
-UserSchema.statics.hashPassword = function (password) {
-  return bcrypt.hash(password, 10);
-};
-
-
 
 UserSchema.pre('save', function (next) {
   const user = this;
@@ -49,13 +32,12 @@ UserSchema.pre('save', function (next) {
   // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) return next();
 
-  // generate a salt
+
+  // Proper syntax needed for encrypting a password, we salt it (append some random letters) and then hash it. 
   bcrypt.hash(user.password, saltRounds, function (err, hash) {
     user.password = hash;
     next();
   });
-
-
 });
 
 

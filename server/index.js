@@ -49,17 +49,10 @@ app.post('/login', (req, res, next) => {
 
   User.findOne({ email: req.body.email })
     .then(user => {
-
-      console.log('compare', user.comparePassword(req.body.password));
       if (!user) {
         console.log('No such user found:', req.body.email);
-        console.log('where am i')
         res.status(401).send('Wrong username and/or password');
-
       } else if (!user.comparePassword(req.body.password)) {
-        console.log('compare', user.comparePassword(req.body.password));
-        console.log('where am i2');
-
         console.log('Incorrect password for user:', req.body.email);
         res.json('Wrong username and/or password');
       } else {
