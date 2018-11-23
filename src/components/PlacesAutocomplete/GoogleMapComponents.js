@@ -7,27 +7,35 @@ const { compose, withProps } = require("recompose");
 
 const mapEnvironment = compose(
   withProps({
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px` }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
-  withScriptjs,
+
   withGoogleMap
 );
 
-const StreetViewLayout = props => (
-  <GoogleMap defaultZoom={8} >
-    <StreetViewPanorama position={{ lat: props.propertyLat, lng: props.propertyLng }} visible>
-    </StreetViewPanorama>
-  </GoogleMap >
-);
+const StreetViewLayout = props => {
+  console.log('props', props);
+  return (
+    <GoogleMap heading={170}>
+      <StreetViewPanorama
+        position={{ lat: props.propertyLat, lng: props.propertyLng }}
+        visible
+        defaultZoom={8}
+        heading={170}
+      >
+      </StreetViewPanorama>
+    </GoogleMap >
+  )
+};
 
 const GoogleMapView = props => (
   <GoogleMap
     defaultZoom={14}
     defaultCenter={{ lat: props.propertyLat, lng: props.propertyLng }}
     center={{ lat: props.propertyLat, lng: props.propertyLng }}
+
 
   >
     {props.isMarkerShown && (

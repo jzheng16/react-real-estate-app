@@ -7,11 +7,10 @@ import PropertyInformation from "./PropertyInformation";
 import "./PlacesAutocomplete.css";
 
 
-
 class PlacesAutocomplete extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { address: '', estate: {}, error: '', isMarkerShown: false, isInfoBoxShown: false, propertyLng: -75.4228, propertyLat: 39.9827, propertyZpid: 0 };
+    this.state = { address: '', estate: {}, error: '', isMarkerShown: false, isInfoBoxShown: false, propertyLng: -75.4228, propertyLat: 39.9827, propertyZpid: 0, heading: 0 };
     this.searchZillow = this.searchZillow.bind(this);
     this.toggleMarkerInfoBox = this.toggleMarkerInfoBox.bind(this);
 
@@ -24,6 +23,7 @@ class PlacesAutocomplete extends React.Component {
 
     autoComplete.addListener("place_changed", () => {
       let place = autoComplete.getPlace();
+      console.log('place', place);
       let location = place.geometry.location;
       this.setState({
         address: place.formatted_address,
@@ -31,7 +31,24 @@ class PlacesAutocomplete extends React.Component {
         propertyLat: location.lat()
 
       });
+      const target = new window.google.maps.LatLng(this.state.propertyLat, this.state.propertyLng);
+      const sv = new window.google.maps.StreetViewService();
+      const pano = sv.getPanoramaByLocation(target, 100, (result, status) => {
+        if (status == window.google.maps.StreetViewStatus.OK) {
+
+          this.setState({
+            heading: window.google.maps.geometry.spherical.computeHeading(result.location.latLng, target)
+          })
+          console.log('heading', this.state.heading)
+
+        }
+        else {
+          console.log("Cannot find a street view for this property.");
+          return;
+        }
+      });
     });
+
   }
 
   toggleMarkerInfoBox() {
@@ -90,7 +107,7 @@ class PlacesAutocomplete extends React.Component {
 
   render() {
 
-    const { estate, address, propertyLat, propertyLng, isMarkerShown, isInfoBoxShown } = this.state;
+    const { estate, address, propertyLat, propertyLng, isMarkerShown, isInfoBoxShown, heading } = this.state;
     //destructuring very important for rendering component state, or else we'd have to (below)
     // const markershow=this.state.markerShown
     // const address=this.state.address
@@ -106,7 +123,7 @@ class PlacesAutocomplete extends React.Component {
           <button onClick={this.searchZillow}> Search </button>
         </div>
         <div className="propertyDisplay">
-          <StreetView propertyLat={propertyLat} propertyLng={propertyLng} />
+          <StreetView propertyLat={propertyLat} propertyLng={propertyLng} heading={heading} />
           <div id="googleMap">
             <StyledMapWithAnInfoBox toggleMarkerInfoBox={this.toggleMarkerInfoBox} propertyLat={propertyLat} propertyLng={propertyLng} isMarkerShown={isMarkerShown} isInfoBoxShown={isInfoBoxShown} />
             {/* {...this.state} */}
