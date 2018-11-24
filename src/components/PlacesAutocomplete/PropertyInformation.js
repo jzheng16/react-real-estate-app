@@ -1,4 +1,5 @@
 import React from 'react';
+import './PropertyInformation.css';
 
 export default props => {
   console.log('What is being passed down to me from PlacesAutocomplete.js? ', props);
@@ -19,24 +20,85 @@ export default props => {
       <div className="general-information">
         <p> Facts and Features </p>
         <div className="facts-at-a-glance">
-          <div className="row-1">
+          <div className="column-1">
+
+
             <div>
-              <div className="bathMediaImg">
-                <span className="fas fa-bath"></span>
+              <div className="media-image">
+                <i className="fas fa-bath"></i>
               </div>
-              <div>
-                <div className="bathrooms size-3"> Bathrooms </div>
+              <div className="facts-details">
+                <div className="bathrooms"> Bathrooms </div>
                 <div> {estate.bathrooms || 'No Data'} </div>
               </div>
-
             </div>
-            <div className="bedrooms size-3"> Bedrooms {estate.bedrooms || 'No Data'} </div>
-            <div className="squareFeet size-3"> Square Feet {estate.finishedSqFt || 'No Data'} </div>
+
+
+            <div>
+              <div className="media-image">
+                <i className="fas fa-bed"></i>
+              </div>
+              <div className="facts-details">
+                <div className="bedrooms"> Bedrooms </div>
+                <div> {estate.bathrooms || 'No Data'} </div>
+              </div>
+            </div>
+
+
+
+            <div>
+              <div className="media-image">
+                <i className="fas fa-expand-arrows-alt" />
+              </div>
+              <div className="facts-details">
+                <div className="squareFeet"> Square Feet </div>
+                <div> {estate.finishedSqFt || 'No Data'} </div>
+              </div>
+            </div>
+
+
+
+
+
           </div>
-          <div className="row-2">
-            <div className="yearBuilt size-3"> Year Built {estate.yearBuilt || 'No Data'} </div>
-            <div className="property-type size-3"> Property Type {estate.useCode || 'No Data'} </div>
-            <div className="lotSizeSqFt"> Lot Size {estate.lotSizeSqFt || 'No Data'} </div>
+
+
+
+
+          <div className="column-2">
+
+            <div>
+              <div className="media-image">
+                <i className="far fa-calendar" />
+              </div>
+              <div className="facts-details">
+                <div className=""> Year Built </div>
+                <div> {estate.yearBuilt || 'No Data'} </div>
+              </div>
+            </div>
+
+            <div>
+              <div className="media-image">
+                <i className="fas fa-home" />
+              </div>
+              <div className="facts-details">
+                <div className="propertyType"> Property Type </div>
+                <div> {estate.useCode || 'No Data'} </div>
+              </div>
+            </div>
+
+            <div>
+              <div className="media-image">
+                <i className="fas fa-expand" />
+              </div>
+              <div className="facts-details">
+                <div className="lotSizeSqFt"> Lot Size </div>
+                <div> {estate.lotSizeSqFt || 'No Data'} </div>
+              </div>
+            </div>
+
+
+
           </div>
         </div>
         <div className="zestimate">
@@ -50,6 +112,11 @@ export default props => {
         <a href={estate.links && estate.links.homedetails} target="_blank" rel="noopener noreferrer"> Home Details</a>
         <a href={estate.links && estate.links.mapthishome} target="_blank" rel="noopener noreferrer">View Property</a>
       </div>
+
+
+      <i className="fas fa-expand-arrows-alt" />
+      <i className="fas fa-home" />
+      <i className="fas fa-expand" />
     </div>
   )
 }

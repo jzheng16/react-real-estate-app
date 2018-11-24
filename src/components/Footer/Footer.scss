@@ -1,0 +1,70 @@
+footer {
+  background-color: crimson;
+  text-align: center;
+  padding-top: 35px;
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  display: grid;
+  grid-template-columns: 1fr;
+
+}
+
+@media only screen and (min-width: 650px) {
+  footer {
+    grid-template-columns: 1fr 1fr; 
+  }
+} 
+
+@media only screen and (min-width: 1000px) {
+  footer {
+    grid-template-columns: 1fr 1fr 1fr;
+
+    .form-header {
+      margin-bottom: 12px;
+      margin-top: 0px;
+    }
+    
+  }
+  
+}
+
+
+.footer-contact {
+  max-width: 400px;
+  margin: 0 auto;  
+  width: 100%;
+}
+
+.footer-logo-subtext {
+  font-size: 1.6em;
+}
+
+.form-header {
+  margin-bottom: 12px;
+  margin-top: 20px;
+}
+.contact-form input,
+textarea {
+  border-radius: 5px;
+  margin: 5px;
+  width: 95%;
+  height: 40px;
+}
+.contact-form {
+  text-align: right;
+}
+.contact-form button {
+  background: transparent;
+  color: white;
+  padding: 8px;
+  margin-right: 2.5%;
+}
+
+.agent-access {
+  background: transparent;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9em;
+  color: lightgray;
+  margin: 15px;
+  padding: 15px;
+}

@@ -1,0 +1,24 @@
+.general-information p {
+  text-align: center; }
+
+.address {
+  margin: 1em auto 0em auto; }
+
+.facts-at-a-glance {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center; }
+
+.column-1, .column-2 {
+  margin: 1em .5em .75em 1em; }
+
+.media-image {
+  margin: auto 0;
+  display: inline-block; }
+
+.fa-bath {
+  font-size: 1.5em; }
+
+.facts-details {
+  display: inline-block; }
