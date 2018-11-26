@@ -23,7 +23,7 @@ class Routes extends Component {
         <Route exact path="/propertysearch" component={PropertySearch} />
         <Route
           exact
-          path="/UserSavedProperties"
+          path="/usersavedproperties"
           component={UserSavedProperties}
         />
 

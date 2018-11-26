@@ -113,10 +113,8 @@ export default props => {
         <a href={estate.links && estate.links.mapthishome} target="_blank" rel="noopener noreferrer">View Property</a>
       </div>
 
+      <button onClick={props.savedProperty}> Save Property </button>
 
-      <i className="fas fa-expand-arrows-alt" />
-      <i className="fas fa-home" />
-      <i className="fas fa-expand" />
     </div>
   )
 }

@@ -64,6 +64,7 @@ class Login extends Component {
           <button type="Submit"> Login </button>
         </form>
         {this.state.error ? <div>{this.state.error}</div> : null}
+        <a href="/signup">Sign Up Here</a>
       </div>
     );
   }

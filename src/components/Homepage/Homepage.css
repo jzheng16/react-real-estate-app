@@ -28,8 +28,25 @@ body {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  z-index: 3;
   position: absolute;
   width: 100%; }
+
+.regular-nav {
+  list-style-type: none; }
+
+.nav-item {
+  display: inline-block;
+  margin: 0 1em; }
+  .nav-item a {
+    text-decoration: none;
+    color: brown; }
+  .nav-item a:visited {
+    text-decoration: none;
+    color: brown; }
+
+.fa-user-circle {
+  font-size: 1.5em; }
 
 .expanded-menu li {
   border: 1px solid brown;

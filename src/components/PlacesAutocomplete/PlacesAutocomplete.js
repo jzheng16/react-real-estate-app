@@ -15,8 +15,8 @@ class PlacesAutocomplete extends React.Component {
       error: "",
       isMarkerShown: false,
       isInfoBoxShown: false,
-      propertyLng: -75.4228,
-      propertyLat: 39.9827,
+      propertyLng: 0,
+      propertyLat: 0,
       propertyZpid: 0,
       heading: 0
     };
@@ -140,32 +140,38 @@ class PlacesAutocomplete extends React.Component {
     // const infoboxShown=this.stat.infoBoxShown
 
     return (
-      <div>
+      <div className="places-container">
         <div id="pac-container">
-          <input id="pac-input" type="text" placeholder="Enter a location" />
-          <button onClick={this.searchZillow}> Search </button>
+          <input id="pac-input" type="text" placeholder="Search for a property..." />
+          <button className="search" onClick={this.searchZillow}> <i className="fas fa-search"></i> </button>
         </div>
-        <div className="propertyDisplay">
-          <div id="street-view">
-            <StreetView
-              propertyLat={propertyLat}
-              propertyLng={propertyLng}
-              heading={heading}
-            />
-          </div>
+
+        {propertyLat && propertyLng ?
+          <div className="propertyDisplay">
+            <div id="street-view">
+              <StreetView
+                propertyLat={propertyLat}
+                propertyLng={propertyLng}
+                heading={heading}
+              />
+            </div>
 
 
-          <div id="googleMap">
-            <StyledMapWithAnInfoBox
-              toggleMarkerInfoBox={this.toggleMarkerInfoBox}
-              propertyLat={propertyLat}
-              propertyLng={propertyLng}
-              isMarkerShown={isMarkerShown}
-              isInfoBoxShown={isInfoBoxShown}
-            />
-            {/* {...this.state} */}
+            <div id="googleMap">
+              <StyledMapWithAnInfoBox
+                toggleMarkerInfoBox={this.toggleMarkerInfoBox}
+                propertyLat={propertyLat}
+                propertyLng={propertyLng}
+                isMarkerShown={isMarkerShown}
+                isInfoBoxShown={isInfoBoxShown}
+              />
+              {/* {...this.state} */}
+            </div>
           </div>
-        </div>
+          :
+          null
+
+        }
         {Object.keys(estate).length !== 0 ? (
           <div>
             <PropertyInformation estate={estate} address={address} />

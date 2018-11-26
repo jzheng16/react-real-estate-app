@@ -5,18 +5,24 @@ import mainlogo from "../assets/main-logo.png";
 class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { menuIsOpen: false };
+    this.state = { menuIsOpen: false, width: 0 };
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this);
   }
 
   toggleMenu() {
-    console.log("menu is clicked", this.state.menuIsOpen);
     this.setState({ menuIsOpen: !this.state.menuIsOpen });
   }
 
   componentDidMount() {
-    //this.getUserInformation();
+    window.addEventListener('resize', this.updateDimensions)
   }
+
+  updateDimensions() {
+    this.setState({ width: window.innerWidth });
+    console.log(this.state.width);
+  }
+
 
   render() {
     return (
@@ -31,10 +37,35 @@ class Navbar extends Component {
           </div>
           <span className="logo-text">Preferred Realtors</span>
 
-          <div onClick={this.toggleMenu}>
-            <i className="fas fa-bars" id="ham-icon" />
-          </div>
-          <i className="fas fa-user-circle" />
+          {this.state.width < 500 ?
+            <div onClick={this.toggleMenu}>
+              <i className="fas fa-bars" id="ham-icon" />
+            </div>
+            :
+            <nav>
+              <ul className="regular-nav">
+                <li className="nav-item">
+                  <a href="/">HOME</a>
+                </li>
+                <li className="nav-item">
+                  <a href="/propertysearch">PROPERTY SEARCH</a>
+                </li>
+
+                <li className="nav-item">
+                  <a href="/usersavedproperties">Saved Properties</a>
+                </li>
+                <li className="nav-item">
+                  <a href="/profile">ABOUT ME</a>
+                </li>
+                <li className="nav-item">
+                  <a href="/contact">CONTACT</a>
+                </li>
+              </ul>
+            </nav>
+          }
+
+
+          <a href="/login"> <i className="fas fa-user-circle" /> </a>
         </div>
 
         {this.state.menuIsOpen === true ? (
