@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import realtorImg from "../assets/realtor.jpg";
-import mainlogo from "../assets/main-logo.png";
+import realtorImg from "../../assets/realtor.jpg";
+import mainlogo from "../../assets/main-logo.png";
+import "./Navbar.css";
 
 class Navbar extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
+    this.updateDimensions();
     window.addEventListener('resize', this.updateDimensions)
   }
 
@@ -37,7 +39,7 @@ class Navbar extends Component {
           </div>
           <span className="logo-text">Preferred Realtors</span>
 
-          {this.state.width < 500 ?
+          {this.state.width < 650 ?
             <div onClick={this.toggleMenu}>
               <i className="fas fa-bars" id="ham-icon" />
             </div>
@@ -56,9 +58,6 @@ class Navbar extends Component {
                 </li>
                 <li className="nav-item">
                   <a href="/profile">ABOUT ME</a>
-                </li>
-                <li className="nav-item">
-                  <a href="/contact">CONTACT</a>
                 </li>
               </ul>
             </nav>
@@ -84,9 +83,6 @@ class Navbar extends Component {
               </li>
               <li className="nav-item">
                 <a href="/profile">ABOUT ME</a>
-              </li>
-              <li className="nav-item">
-                <a href="/contact">CONTACT</a>
               </li>
             </ul>
           </nav>

@@ -25,6 +25,8 @@ class PlacesAutocomplete extends React.Component {
   }
 
   componentDidMount() {
+
+
     // initialize the autocomplete functionality using the #pac-input input box
     let inputNode = document.getElementById("pac-input");
     let autoComplete = new window.google.maps.places.Autocomplete(inputNode);
@@ -131,6 +133,7 @@ class PlacesAutocomplete extends React.Component {
       isInfoBoxShown,
       heading
     } = this.state;
+    console.log('this.props.location', this.props.location);
     //destructuring very important for rendering component state, or else we'd have to (below)
     // const markershow=this.state.markerShown
     // const address=this.state.address
