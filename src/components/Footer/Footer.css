@@ -9,14 +9,18 @@ footer {
 
 @media only screen and (min-width: 650px) {
   footer {
-    grid-template-columns: 1fr 1fr; } }
+    grid-template-columns: 1fr 1fr; }
+  .footer-contact {
+    grid-column: 1/3; } }
 
 @media only screen and (min-width: 1000px) {
   footer {
     grid-template-columns: 1fr 1fr 1fr; }
     footer .form-header {
       margin-bottom: 12px;
-      margin-top: 0px; } }
+      margin-top: 0px; }
+    footer .footer-contact {
+      grid-column: 3/4; } }
 
 .footer-contact {
   max-width: 400px;

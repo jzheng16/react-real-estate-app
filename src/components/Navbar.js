@@ -62,6 +62,7 @@ class Navbar extends Component {
                 </li>
               </ul>
             </nav>
+
           }
 
 
@@ -71,13 +72,13 @@ class Navbar extends Component {
         {this.state.menuIsOpen === true ? (
           <ul className="expanded-menu">
             <li>
-              <a href="./index.html">HOME</a>
+              <a href="/">HOME</a>
             </li>
             <li>
               <a href="/propertysearch">PROPERTY SEARCH</a>
             </li>
             <li>
-              <a href="./market-trends.html">MARKET TRENDS</a>
+              <a href="/market-trends.html">MARKET TRENDS</a>
             </li>
             <li>
               <a href="/profile">ABOUT ME</a>
