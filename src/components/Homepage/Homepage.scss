@@ -29,6 +29,7 @@ body {
 }
 
 .expanded-menu {
+  transition: all .5s ease-in-out;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -36,6 +37,14 @@ body {
   position: absolute;
   width: 100%;
 }
+
+.expanded-menu:target {
+  line-height: 1.5;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  color: black;
+}
+ 
 
 .regular-nav {
   list-style-type: none;
