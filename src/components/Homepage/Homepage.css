@@ -17,60 +17,6 @@ body {
   padding-right: 30px;
   /* display: none; */ }
 
-.navbar {
-  height: 39px;
-  display: grid;
-  grid-auto-flow: column;
-  align-items: center;
-  grid-template-columns: 60px 107px; }
-
-.expanded-menu {
-  transition: all .5s ease-in-out;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  z-index: 3;
-  position: absolute;
-  width: 100%; }
-
-.expanded-menu:target {
-  line-height: 1.5;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  color: black; }
-
-.regular-nav {
-  list-style-type: none; }
-
-.nav-item {
-  display: inline-block;
-  margin: 0 1em; }
-  .nav-item a {
-    text-decoration: none;
-    color: brown; }
-  .nav-item a:visited {
-    text-decoration: none;
-    color: brown; }
-
-.fa-user-circle {
-  font-size: 1.5em; }
-
-.expanded-menu li {
-  border: 1px solid brown;
-  background-color: white;
-  padding: 11px 7px;
-  font-family: "Open Sans", sans-serif;
-  color: brown; }
-
-.expanded-menu a:link,
-.expanded-menu a:visited {
-  text-decoration: none;
-  color: brown; }
-
-.main-logo,
-.agent-image {
-  display: inline; }
-
 .logo-text {
   text-transform: uppercase;
   color: #6d6d6d;
@@ -208,7 +154,7 @@ body {
   padding: 40px; }
 
 .featured-property {
-  padding-top: 130px; }
+  padding-top: 5px; }
 
 .property-img {
   background: url("../../assets/home1.jpg");

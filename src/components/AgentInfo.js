@@ -1,10 +1,11 @@
 import React from 'react';
+import realtor from '../assets/realtor.jpg';
 
 export default props => {
   return (
     <div className="agent-info">
       <div className="realtor-img-wrapper">
-        <img src="./assets/realtor.jpg" alt="" />
+        <img src={realtor} alt="realtor" />
       </div>
       <div className="company-description">
         Thanks to our global network and stellar reputation, RE/MAX is the industry leader in competitive advantages for

@@ -38,7 +38,7 @@ class Login extends Component {
         console.log(response.data);
         if (typeof response.data === "object") {
           history.push({
-            pathname: "UserSavedProperties",
+            pathname: "usersavedproperties",
             state: response.data
           });
           // redirecting user to UserSavedProperties page - later to saved properties
