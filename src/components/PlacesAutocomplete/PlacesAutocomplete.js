@@ -71,6 +71,7 @@ class PlacesAutocomplete extends React.Component {
     const savedPropertyInformation = {
       beds, baths, zestimate, address,
     };
+    console.log(zestimate, baths, beds, address);
     axios.post('/saveProperty', savedPropertyInformation)
       .then(response => {
         console.log('What is our server responding with?', response.data);

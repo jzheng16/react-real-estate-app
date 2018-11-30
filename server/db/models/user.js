@@ -1,26 +1,27 @@
-// We have to create the user Schema 
+// We have to create the user Schema
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
 
-const propertySchema = new mongoose.Schema({
-  address: String
-})
-
 const UserSchema = mongoose.Schema({
   email: { type: String },
-  userSavedProperties: [propertySchema],
+  savedProperties: [{
+    address: String,
+    zestimate: Number,
+    beds: Number,
+    baths: Number,
+  }],
 
   password: {
     type: String,
-    required: true
+    required: true,
   },
 });
 
 
 UserSchema.methods.serialize = function () {
   return {
-    email: this.email || ''
+    email: this.email || '',
   };
 };
 
@@ -33,8 +34,8 @@ UserSchema.pre('save', function (next) {
   if (!user.isModified('password')) return next();
 
 
-  // Proper syntax needed for encrypting a password, we salt it (append some random letters) and then hash it. 
-  bcrypt.hash(user.password, saltRounds, function (err, hash) {
+  // Proper syntax needed for encrypting a password, we salt it (append some random letters) and then hash it.
+  bcrypt.hash(user.password, saltRounds, (err, hash) => {
     user.password = hash;
     next();
   });
@@ -47,8 +48,6 @@ UserSchema.methods.comparePassword = function (candidatePassword) {
       console.log('matching?', isMatch);
       return isMatch;
     });
-
-
 };
 
 const User = mongoose.model('User', UserSchema);
