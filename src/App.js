@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import Routes from "./routes";
+import React, { Component } from 'react';
+import Routes from './routes';
 
-import Navbar from "./components/Navbar/Navbar";
-import Topstrip from "./components/Topstrip";
-import Footer from "./components/Footer/Footer";
+import Navbar from './components/Navbar/Navbar';
+import Topstrip from './components/Topstrip';
+import Footer from './components/Footer/Footer';
 
 class App extends Component {
   render() {

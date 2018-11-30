@@ -1,12 +1,15 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const passport = require('passport');
+
 const app = express();
 const axios = require('axios');
 const { API_KEY } = require('../config');
 const db = require('./db/index.js');
-const passport = require("passport");
+
 const User = require('./db/models/user');
+
 const port = process.env.PORT || 5000;
 
 // Connect to our database
@@ -16,22 +19,22 @@ db.once('open', () => {
 });
 
 
-//Passport middleware 
+// Passport middleware
 
-passport.serializeUser(function (user, cb) {
-  console.log('user?', user)
+passport.serializeUser((user, cb) => {
+  console.log('user?', user);
   cb(null, user._id);
 });
 
-passport.deserializeUser(function (id, cb) {
-  User.findById(id, function (err, user) {
-    console.log('user', user)
+passport.deserializeUser((id, cb) => {
+  User.findById(id, (err, user) => {
+    console.log('user', user);
     cb(err, user);
   });
 });
 
 
-//passport.use(localStrategy);
+// passport.use(localStrategy);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -45,8 +48,6 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.post('/login', (req, res, next) => {
-
-
   User.findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
@@ -64,7 +65,7 @@ app.post('/login', (req, res, next) => {
 });
 
 // Signup
-// Email and a password 
+// Email and a password
 app.post('/signup', (req, res) => {
   // req.body.email req.body.password
   User.findOne({ email: req.body.email })
@@ -74,9 +75,8 @@ app.post('/signup', (req, res) => {
           .then(newUser => {
             console.log('Successfully created new user!', newUser);
             res.json(newUser);
-          })
-      }
-      else {
+          });
+      } else {
         res.json('Sorry email is in use, please try again');
       }
     });
@@ -86,22 +86,42 @@ app.post('/signup', (req, res) => {
 
 
 app.get('/deepSearchResults/:address/:citystatezip', (req, res) => {
-
   axios.get(
-    `http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=${req.params.address}&citystatezip=${req.params.citystatezip}`
+    `http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${API_KEY}&address=${req.params.address}&citystatezip=${req.params.citystatezip}`,
   )
     .then(response => res.send(response.data))
     .catch(err => console.log(err));
-})
+});
 
 app.get('/deepComparables/:zpid', (req, res) => {
-
   axios.get(
-    `http://www.zillow.com/webservice/GetDeepComps.htm?zws-id=${API_KEY}&zpid=${req.params.zpid}&count=5`
+    `http://www.zillow.com/webservice/GetDeepComps.htm?zws-id=${API_KEY}&zpid=${req.params.zpid}&count=5`,
   )
     .then(response => res.send(response.data))
     .catch(err => console.log(err));
-})
+});
+
+
+app.post('/saveProperty', (request, response) => {
+  console.log('what are we getting back from our request?', request.body.address, request.body.zestimate);
+  User.updateOne(
+    { email: 'joey@joey.com' },
+    { '$push': { userSavedProperties: request.body } },
+  )
+    .then((user, x) => {
+      console.log('user', user);
+      response.json(x);
+    });
+});
+
+app.get('/getSavedProperties', (req, res) => {
+  User.findOne(
+    { email: 'joey@joey.com' },
+  )
+    .then(user => {
+      res.json(user);
+    });
+});
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

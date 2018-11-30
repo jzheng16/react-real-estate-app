@@ -13,7 +13,6 @@ export default props => {
   const { address, estate } = props;
 
 
-
   return (
     <div className="property-information">
       <div className="address"> {address} </div>
@@ -45,7 +44,6 @@ export default props => {
             </div>
 
 
-
             <div>
               <div className="media-image">
                 <i className="fas fa-expand-arrows-alt" />
@@ -57,12 +55,7 @@ export default props => {
             </div>
 
 
-
-
-
           </div>
-
-
 
 
           <div className="column-2">
@@ -98,7 +91,6 @@ export default props => {
             </div>
 
 
-
           </div>
         </div>
         <div className="zestimate">
@@ -113,8 +105,9 @@ export default props => {
         <a href={estate.links && estate.links.mapthishome} target="_blank" rel="noopener noreferrer">View Property</a>
       </div>
 
-      <button onClick={props.savedProperty}> Save Property </button>
+      {/* We need to pass in information about our property through this button so that our main component PAC receives it */}
+      <button type="button" onClick={event => props.savedProperty(estate.bathrooms, estate.bedrooms, estate.zestimate.amount, address, event)}> Save Property </button>
 
     </div>
-  )
-}
+  );
+};

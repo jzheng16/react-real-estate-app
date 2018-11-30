@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import Banner from "../Banner";
-import AgentInfo from "../AgentInfo";
-import Slogan from "../Slogan";
-import FeaturedProperty from "../FeaturedProperty";
+import React, { Component } from 'react';
+import Banner from '../Banner';
+import AgentInfo from '../AgentInfo';
+import Slogan from '../Slogan';
+import FeaturedProperty from '../FeaturedProperty';
 
-import "./Homepage.css";
+import './Homepage.css';
 
 class Homepage extends Component {
   render() {
