@@ -37,7 +37,8 @@ module.exports = {
         ]
       }
     ],
-    'quote-props': 0
+    'quote-props': 0,
+    'react/jsx-one-expression-per-line': 0
   },
   overrides: [
     {

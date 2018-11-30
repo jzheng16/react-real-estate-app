@@ -1,12 +1,12 @@
-import { Route, Switch, withRouter } from "react-router-dom";
-import React, { Component } from "react";
-import Homepage from "./components/Homepage/Homepage";
-import SignUp from "./components/SignUp/SignUp";
-import Login from "./components/Login/Login";
-import UserSavedProperties from "./components/UserSavedProperties/UserSavedProperties";
+import { Route, Switch, withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
+import Homepage from './components/Homepage/Homepage';
+import SignUp from './components/SignUp/SignUp';
+import Login from './components/Login/Login';
+import UserSavedProperties from './components/UserSavedProperties/UserSavedProperties';
 
-import Profile from "./components/Profile/Profile";
-import PropertySearch from "./components/PropertySearch/PropertySearch";
+import Profile from './components/Profile/Profile';
+import PropertySearch from './components/PropertySearch/PropertySearch';
 
 class Routes extends Component {
   // constructor(props) {

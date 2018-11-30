@@ -1,21 +1,19 @@
 import React from 'react';
-import SignUp from './SignUp/SignUp';
 
-const Topstrip = props => {
-  return (
-    <div className="top-strip">
 
-      <div className="phone-numbers">
-        <span className="office-phone">
-          Office Phone - 123.456.7890
+const Topstrip = props => (
+  <div className="top-strip">
+
+    <div className="phone-numbers">
+      <span className="office-phone">
+        Office Phone - 123.456.7890
       </span>
-        <span className="divider">|</span>
-        <span className="mobile-phone">
-          Mobile Phone - 321.654.0987
+      <span className="divider">|</span>
+      <span className="mobile-phone">
+        Mobile Phone - 321.654.0987
       </span>
-      </div>
-    </div >
-  )
-}
+    </div>
+  </div>
+);
 
 export default Topstrip;
