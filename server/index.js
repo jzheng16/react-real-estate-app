@@ -102,15 +102,22 @@ app.get('/deepComparables/:zpid', (req, res) => {
 });
 
 
-app.post('/saveProperty', (request, response) => {
-  console.log('what are we getting back from our request?', request.body.address, request.body.zestimate);
+app.post('/saveProperty', (req, response) => {
+  console.log('what are we getting back from our req?', req.body);
   User.updateOne(
-    { email: 'joey@joey.com' },
-    { '$push': { userSavedProperties: request.body } },
+    { 'email': 'joey@joey.com' },
+    {
+      '$push': {
+        'savedProperties': {
+          'zestimate': req.body.zestimate,
+          'address': req.body.address,
+
+        },
+      },
+    },
   )
-    .then((user, x) => {
-      console.log('user', user);
-      response.json(x);
+    .then(value => {
+      response.json();
     });
 });
 

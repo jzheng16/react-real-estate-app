@@ -22,7 +22,7 @@ class Navbar extends Component {
 
   updateDimensions() {
     this.setState({ width: window.innerWidth });
-    console.log(this.state.width);
+
   }
 
 
