@@ -40,13 +40,13 @@ class Banner extends Component {
           </div>
           <div className="banner-icons">
             <div className="icon-wrapper">
-              <i className="fas fa-3x fa-chart-bar"></i>
+              <a className="feature-links" href="/profile"> <i className="fas fa-3x fa-chart-bar"></i> </a>
             </div>
             <div className="icon-wrapper">
-              <i className="fas fa-3x fa-home"></i>
+              <a className="feature-links" href="/propertysearch"> <i className="fas fa-3x fa-home"></i> </a>
             </div>
             <div className="icon-wrapper">
-              <i className="fas fa-3x fa-mobile-alt"></i>
+              <a className="feature-links" href="#contact"> <i className="fas fa-3x fa-mobile-alt"></i> </a>
             </div>
           </div>
           <div className="home-finder-wrapper">

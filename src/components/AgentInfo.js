@@ -1,10 +1,10 @@
 import React from 'react';
-import realtor from '../assets/realtor.jpg';
+import Ken from '../assets/keng.jpg';
 
 export default props => (
   <div className="agent-info">
     <div className="realtor-img-wrapper">
-      <img src={realtor} alt="realtor" />
+      <img src={Ken} alt="realtor" />
     </div>
     <div className="company-description">
       Thanks to our global network and stellar reputation, RE/MAX is the industry leader in competitive advantages for
@@ -17,13 +17,6 @@ export default props => (
       of
       your questions. RE/MAX Associates are The Real Estate Leaders® you can always depend on.
     </div>
-    <div className="contact-links">
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-        <i className="fab fa-2x fa-facebook-f"></i>
-      </a>
-      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-        <i className="fab fa-2x fa-linkedin"></i>
-      </a>
-    </div>
+
   </div>
 );
