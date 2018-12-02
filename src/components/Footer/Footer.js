@@ -25,12 +25,17 @@ export default props => (
       <div className="follow">
         FOLLOW ME
         <div className="follow-icon">
-          <i className="fab fa-1x fa-facebook-f"></i>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-2x fa-facebook-f"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-2x fa-linkedin"></i>
+          </a>
         </div>
       </div>
     </div>
 
-    <div className="footer-contact">
+    <div className="footer-contact" id="contact">
       <div className="form-header">
         CONTACT
       </div>

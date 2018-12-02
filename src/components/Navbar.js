@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import realtorImg from '../assets/realtor.jpg';
+
 import mainlogo from '../assets/main-logo.png';
 
 class Navbar extends Component {
@@ -29,7 +29,7 @@ class Navbar extends Component {
       <div>
         <div className="navbar">
           <div className="agent-image">
-            <img id="realtor-img" src={realtorImg} alt="realtor" />
+            <img id="realtor-img" src={Ken} alt="realtor" />
           </div>
 
           <div className="main-logo">

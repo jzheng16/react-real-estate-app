@@ -38,7 +38,7 @@ body {
 .banner {
   background-image: url("../../assets/banner-img.jpg");
   width: 100%;
-  height: 95vh;
+  height: auto;
   background-size: cover;
   background-position: 50% 50%; }
 
@@ -66,12 +66,21 @@ body {
   display: grid;
   align-items: center;
   text-align: center; }
+  .icon-wrapper:hover {
+    background: transparent; }
 
 .banner-icons {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding-top: 250px;
   color: white; }
+
+.feature-links {
+  text-decoration: none; }
+  .feature-links:visited {
+    color: inherit; }
+  .feature-links:hover {
+    color: #bcf88b; }
 
 .home-finder-text {
   text-align: center;
@@ -83,7 +92,6 @@ body {
 
 .home-finder-searchbox {
   background: rgba(255, 255, 255, 0.5);
-  height: 130px;
   padding: 20px; }
 
 .home-finder-input {

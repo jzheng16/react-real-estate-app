@@ -1,4 +1,5 @@
 footer {
+  width: 100%;
   background-color: crimson;
   text-align: center;
   padding-top: 35px;
@@ -75,3 +76,26 @@ textarea {
   margin: 15px;
   padding: 15px;
 }
+
+
+
+.follow-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+.fa-facebook-f {
+
+  color: #0077B5;
+  margin-right: .5em;
+}
+.fa-linkedin {
+ 
+  color: #0077B5;
+ 
+
+}
+  
+}
+
+
+
