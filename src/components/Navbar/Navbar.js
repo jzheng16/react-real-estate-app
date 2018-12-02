@@ -3,6 +3,7 @@ import realtorImg from "../../assets/realtor.jpg";
 import mainlogo from "../../assets/main-logo.png";
 import "./Navbar.css";
 
+
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -58,6 +59,9 @@ class Navbar extends Component {
                 </li>
                 <li className="nav-item">
                   <a href="/profile">ABOUT ME</a>
+                </li>
+                <li classname="nav-item">
+                  <a href="/request">Request More Information</a>
                 </li>
               </ul>
             </nav>
