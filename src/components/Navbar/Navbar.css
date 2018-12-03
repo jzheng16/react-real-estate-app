@@ -1,13 +1,19 @@
 .navbar {
-  height: 39px;
-  display: grid;
-  grid-auto-flow: column;
+  height: 42px;
+  display: flex;
   align-items: center;
-  grid-template-columns: 60px 107px; }
+  justify-content: space-between;
+  flex-direction: row; }
+  .navbar ul {
+    padding-left: 0; }
 
-.main-logo,
 .agent-image {
   display: inline; }
+  .agent-image img {
+    margin-right: .3em; }
+
+#hamburger-icon {
+  margin-right: 3.5em; }
 
 .expanded-menu {
   transition: all .5s ease-in-out;
@@ -16,6 +22,8 @@
   padding: 0;
   z-index: 3;
   position: absolute;
+  left: 0;
+  margin-top: .5em;
   width: 100%; }
   .expanded-menu .nav-item {
     text-transform: uppercase; }
@@ -40,7 +48,10 @@
       color: brown; }
 
 .fa-user-circle {
-  font-size: 1.5em; }
+  font-size: 2em; }
+
+#ham-icon {
+  font-size: 1.6em; }
 
 .expanded-menu li {
   border: 1px solid brown;
@@ -58,4 +69,7 @@
   .navbar {
     height: 50px; }
   .regular-nav {
-    margin: 0px; } }
+    margin: 0px; }
+  .nav-item {
+    font-size: .8em;
+    font-weight: 600; } }

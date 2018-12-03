@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import axios from "axios";
-import history from "../../history";
+import React, { Component } from 'react';
+import axios from 'axios';
+import history from '../../history';
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { emailState: "", passwordState: "" };
+    this.state = { emailState: '', passwordState: '' };
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.loggingIn = this.loggingIn.bind(this);
@@ -14,15 +14,15 @@ class Login extends Component {
   onEmailChange(event) {
     const email = event.target.value;
     this.setState({ emailState: email });
-    console.log("What is my email state right now???", this.state.emailState);
+    console.log('What is my email state right now???', this.state.emailState);
   }
 
   onPasswordChange(event) {
     const password = event.target.value;
     this.setState({ passwordState: password });
     console.log(
-      "What is my password state right now???",
-      this.state.passwordState
+      'What is my password state right now???',
+      this.state.passwordState,
     );
   }
 
@@ -30,16 +30,16 @@ class Login extends Component {
     event.preventDefault();
 
     axios
-      .post("/login", {
+      .post('/login', {
         email: this.state.emailState,
-        password: this.state.passwordState
+        password: this.state.passwordState,
       })
       .then(response => {
         console.log(response.data);
-        if (typeof response.data === "object") {
+        if (typeof response.data === 'object') {
           history.push({
-            pathname: "usersavedproperties",
-            state: response.data
+            pathname: 'usersavedproperties',
+            state: response.data,
           });
           // redirecting user to UserSavedProperties page - later to saved properties
         } else {

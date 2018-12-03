@@ -1,0 +1,25 @@
+.InfoRequestPageContainer {
+  width: 95%;
+  max-width: 1000px; }
+
+.RequestPageTitle {
+  text-align: center; }
+
+.InfoText {
+  margin: 0 auto;
+  width: 90%; }
+  .InfoText span {
+    font-size: .8em; }
+
+.request-form-container {
+  width: 100%;
+  margin: 0 auto; }
+  .request-form-container h1 {
+    text-align: center; }
+
+.request-form {
+  width: 100%; }
+  .request-form input {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: .5em; }
