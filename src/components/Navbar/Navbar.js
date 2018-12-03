@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import realtorImg from "../../assets/realtor.jpg";
-import mainlogo from "../../assets/main-logo.png";
-import "./Navbar.css";
+import React, { Component } from 'react';
+import Ken from '../../assets/keng.jpg';
+import mainlogo from '../../assets/main-logo.png';
+
+import './Navbar.css';
 
 
 class Navbar extends Component {
@@ -12,85 +13,59 @@ class Navbar extends Component {
     this.updateDimensions = this.updateDimensions.bind(this);
   }
 
-  toggleMenu() {
-    this.setState({ menuIsOpen: !this.state.menuIsOpen });
-  }
-
   componentDidMount() {
     this.updateDimensions();
-    window.addEventListener('resize', this.updateDimensions)
+    window.addEventListener('resize', this.updateDimensions);
+  }
+
+  toggleMenu() {
+    this.setState(prevState => ({ menuIsOpen: !prevState.menuIsOpen }));
   }
 
   updateDimensions() {
     this.setState({ width: window.innerWidth });
-
   }
 
-
   render() {
+    const { width, menuIsOpen } = this.state;
     return (
       <div>
         <div className="navbar">
           <div className="agent-image">
-            <img id="realtor-img" src={realtorImg} alt="realtor" />
-          </div>
-
-          <div className="main-logo">
+            <img id="realtor-img" src={Ken} alt="realtor" />
             <img id="main-logo-img" src={mainlogo} alt="main-logo" />
           </div>
-          <span className="logo-text">Preferred Realtors</span>
 
-          {this.state.width < 650 ?
-            <div onClick={this.toggleMenu}>
-              <i className="fas fa-bars" id="ham-icon" />
-            </div>
-            :
-            <nav>
-              <ul className="regular-nav">
-                <li className="nav-item">
-                  <a href="/">HOME</a>
-                </li>
-                <li className="nav-item">
-                  <a href="/propertysearch">PROPERTY SEARCH</a>
-                </li>
-
-                <li className="nav-item">
-                  <a href="/usersavedproperties">Saved Properties</a>
-                </li>
-                <li className="nav-item">
-                  <a href="/profile">ABOUT ME</a>
-                </li>
-                <li classname="nav-item">
-                  <a href="/request">Request More Information</a>
-                </li>
-              </ul>
-            </nav>
-
-          }
-
-
+          {width < 650
+            ? (
+              <div id="hamburger-icon" onClick={this.toggleMenu} onKeyDown={this.toggleMenu} role="button" tabIndex={0}>
+                <i className="fas fa-bars" id="ham-icon" />
+                {menuIsOpen === true ? (
+                  <nav className="toggled-nav">
+                    <ul className="expanded-menu">
+                      <li className="nav-item"> <a href="/">Home</a> </li>
+                      <li className="nav-item"> <a href="/propertysearch">Property Search</a> </li>
+                      <li className="nav-item"> <a href="/savedproperties">Saved Properties</a> </li>
+                      <li className="nav-item"> <a href="/profile">About Me</a> </li>
+                      <li className="nav-item"> <a href="/request">Request</a> </li>
+                    </ul>
+                  </nav>
+                ) : null}
+              </div>
+            )
+            : (
+              <nav>
+                <ul className="regular-nav">
+                  <li className="nav-item"> <a href="/">Home</a> </li>
+                  <li className="nav-item"> <a href="/propertysearch">Property Search</a> </li>
+                  <li className="nav-item"> <a href="/savedproperties">Saved Properties</a> </li>
+                  <li className="nav-item"> <a href="/profile">About Me</a> </li>
+                  <li className="nav-item"> <a href="/request">Request</a> </li>
+                </ul>
+              </nav>
+            )}
           <a href="/login"> <i className="fas fa-user-circle" /> </a>
         </div>
-
-        {this.state.menuIsOpen === true ? (
-          <nav>
-            <ul className="expanded-menu">
-              <li className="nav-item">
-                <a href="/">HOME</a>
-              </li>
-              <li className="nav-item">
-                <a href="/propertysearch">PROPERTY SEARCH</a>
-              </li>
-
-              <li className="nav-item">
-                <a href="/usersavedproperties">Saved Properties</a>
-              </li>
-              <li className="nav-item">
-                <a href="/profile">ABOUT ME</a>
-              </li>
-            </ul>
-          </nav>
-        ) : null}
       </div>
     );
   }

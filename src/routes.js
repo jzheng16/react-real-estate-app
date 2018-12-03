@@ -1,5 +1,6 @@
 import { Route, Switch, withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
+
 import Homepage from './components/Homepage/Homepage';
 import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
@@ -21,7 +22,7 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/propertysearch" component={PropertySearch} />
-        <Route exact path="/usersavedproperties" component={UserSavedProperties} />
+        <Route exact path="/savedproperties" component={UserSavedProperties} />
         <Route exact path="/request" component={InfoRequestPage} />
       </Switch>
     );
