@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Banner from '../Banner';
 import AgentInfo from '../AgentInfo';
 import Slogan from '../Slogan';
-import FeaturedProperty from '../FeaturedProperty';
+import FeaturedProperty from '../FeaturedProperty/FeaturedProperty';
 
 import './Homepage.css';
 

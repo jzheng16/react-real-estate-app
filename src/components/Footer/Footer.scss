@@ -6,6 +6,7 @@ footer {
   color: white;
   font-family: "Open Sans", sans-serif;
   display: grid;
+  
   grid-template-columns: 1fr;
 
 }
@@ -77,6 +78,9 @@ textarea {
   padding: 15px;
 }
 
+.follow-icon {
+  margin-top: 1em;
+}
 
 
 .follow-icon {
@@ -85,12 +89,12 @@ textarea {
   justify-content: center;
 .fa-facebook-f {
 
-  color: #0077B5;
+  color: white;
   margin-right: .5em;
 }
 .fa-linkedin {
  
-  color: #0077B5;
+  color: white;
  
 
 }

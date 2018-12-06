@@ -1,15 +1,18 @@
 .profile-container {
-  min-height: 70vh; }
+  min-height: 70vh;
+}
 
 .profile-title {
   margin: 1.5em 0;
   font-weight: 600;
   text-align: center;
-  font-size: 2em; }
+  font-size: 2em;
+}
 
 .profile-grid {
   display: grid;
-  grid-template-columns: 1fr; }
+  grid-template-columns: 1fr;
+}
 
 .profile-picture {
   width: 10em;
@@ -17,21 +20,27 @@
   border: 1px solid black;
   border-radius: 50%;
   margin: 0 auto;
-  background-image: url("../../assets/keng.jpg");
+  background-image: url('../../assets/keng.jpg');
   background-size: cover;
   background-position: 100%;
   background-repeat: no-repeat;
-  margin-bottom: 2em; }
+  margin-bottom: 2em;
+}
 
 .profile-text {
   text-align: center;
   width: 90%;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 700px ) {
   .profile-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; }
+    grid-template-columns: 1fr 1fr;
+  }
+
   .profile-picture {
     height: 13em;
-    width: 13em; } }
+    width: 13em;
+  }
+}

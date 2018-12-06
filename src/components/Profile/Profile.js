@@ -3,9 +3,9 @@ import './Profile.css';
 
 
 export default props => (
-  <div>
-    <h1>Mindy Maximus</h1>
-    <h2>Z-MAX PREFERRED REALTY</h2>
+  <div className="profile-container">
+    <div className="profile-title">About Ken Gary</div>
+
     <div className="profile-grid">
       <div className="profile-picture"></div>
       <div className="profile-text">

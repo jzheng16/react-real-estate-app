@@ -49,6 +49,8 @@ class Login extends Component {
   }
 
   render() {
+    // Destructuring the error property off of this.state
+    const { error } = this.state;
     return (
       <div>
         <form id="Login" onSubmit={this.loggingIn}>
@@ -61,9 +63,10 @@ class Login extends Component {
             name="passwordInput"
             onChange={this.onPasswordChange}
           />
-          <button type="Submit"> Login </button>
+          <button type="submit"> Login </button>
         </form>
-        {this.state.error ? <div>{this.state.error}</div> : null}
+        {/* ternary expression down below: if error, show error, otherwise, show null (nothing) */}
+        {error ? <div>{error}</div> : null}
         <a href="/signup">Sign Up Here</a>
       </div>
     );
