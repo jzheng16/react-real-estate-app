@@ -12,6 +12,9 @@
 .InfoText {
   margin: 0 auto;
   width: 90%;
+  p {
+    margin: .5em 0;
+  }
   span {
     font-size: .8em;
   }
@@ -19,19 +22,36 @@
 
 .request-form-container {
   width: 100%;
-  margin: 0 auto;
+  margin-left: 2em;
   h1 {
     text-align: center;
   }
 }
 
+.leftFormContainer {
+  grid-column: 1/2;
+  margin: 0 auto;
+}
+
+.rightFormContainer {
+  grid-column: 2/3;
+  margin: 0 auto;
+}
+
 .request-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2em;
   width: 100%;
+  // justify-items: center;
+  // align-items: center;
   input {
     display: block;
     margin: 0 auto;
     margin-bottom: .5em;
     
+  
   }
 }
+
 

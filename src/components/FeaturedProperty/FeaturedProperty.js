@@ -1,4 +1,5 @@
 import React from 'react';
+import './FeaturedProperty.css';
 
 export default props => (
   <div className="featured-property">
