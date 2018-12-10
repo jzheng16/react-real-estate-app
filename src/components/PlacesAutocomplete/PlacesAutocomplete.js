@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import history from '../../history';
 
 import { StreetView, StyledMapWithAnInfoBox } from './GoogleMapComponents';
 import convertXMLtoJson from '../../utilities/convertXMLToJson';
@@ -67,10 +68,23 @@ class PlacesAutocomplete extends React.Component {
 
   savedProperty(beds, baths, zestimate, address, event) {
     const { propertyZpid } = this.state;
-    // console.log(a, b, c, d, event);
+
     const savedPropertyInformation = {
       beds, baths, zestimate, address,
     };
+
+    /* If the user wants to save a property, we have to make sure they're logged in,
+       if not redirect them to login
+    */
+
+    // if (!user) {
+    //   history.push({
+    //     pathname: '/login',
+    //     state: savedPropertyInformation,
+    //   });
+    // }
+
+
     console.log(zestimate, baths, beds, address);
     axios.post('/saveProperty', savedPropertyInformation)
       .then(response => {

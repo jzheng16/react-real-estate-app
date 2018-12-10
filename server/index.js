@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const passport = require('passport');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const axios = require('axios');
@@ -9,6 +10,7 @@ const { API_KEY } = require('../config');
 const db = require('./db/index.js');
 
 const User = require('./db/models/user');
+
 
 const port = process.env.PORT || 5000;
 
@@ -128,6 +130,31 @@ app.get('/getSavedProperties', (req, res) => {
     .then(user => {
       res.json(user);
     });
+});
+
+app.post('/sendemail', (req, res) => {
+  console.log(req.body.sender, req.body.email, req.body.zipcode, req.body.phonenumber);
+  const transport = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'test.no.reply.mfpclone@gmail.com',
+      pass: 'wrY4fezBYGQuiX38FVhgkG6Wr',
+    },
+    logger: false,
+    debug: false,
+  });
+
+  const message = {
+    from: `${req.body.sender}  <test.no.reply.mfpclone@gmail.com>`,
+    to: 'keng4105@gmail.com',
+    subject: 'Find me this damn property',
+    html: `<div> ${req.body.email}, ${req.body.zipcode}, ${req.body.phonenumber} </div>`,
+  };
+
+  transport.sendMail(message, (error, info) => {
+    console.log('success');
+    res.json('success');
+  });
 });
 
 
