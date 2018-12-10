@@ -16,7 +16,7 @@ export default props => (
     </div>
 
     <div className="realtor-info">
-      <div className="realtorName">Mindy Maximus</div>
+      <div className="realtorName">Ken Garimus</div>
       <div className="credentials-contact">
         <div className="credentials"> Associate Broker, SRES, GRI, ALHS </div>
 

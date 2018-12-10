@@ -11,6 +11,9 @@
   #googleMap {
     max-width: 350px; } }
 
+.places-container {
+  min-height: 100vh; }
+
 #pac-container {
   display: flex;
   flex-direction: row;

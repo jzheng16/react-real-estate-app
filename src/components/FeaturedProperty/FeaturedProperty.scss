@@ -1,0 +1,49 @@
+
+.featured-property {
+  padding-top: 5px;
+}
+.property-img {
+  background: url("../../assets/home1.jpg");
+  height: 250px;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.property-info {
+  height: 130px;
+  border: 1px solid lightgreen;
+  text-align: center;
+  /* display: grid; */
+  font-family: "Open Sans", sans-serif;
+  color: grey;
+}
+.price {
+  font-size: 2em;
+  padding-top: 15px;
+  font-weight: 100;
+}
+
+.address,
+.room-description {
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+@media only screen and (min-width: 700px) {
+  .property-img {
+    height: 400px;
+  }
+
+}
+@media only screen and (min-width: 1000px) {
+  .property-img {
+    height: 600px;
+  }
+
+}
+@media only screen and (min-width: 1400px) {
+  .property-img {
+    height: 800px;
+  }
+
+}
