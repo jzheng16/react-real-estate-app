@@ -16,10 +16,12 @@ class InfoRequestPage extends Component {
     const email = e.target.email.value;
     const zipcode = e.target.zipcode.value;
     const phonenumber = e.target.phonenumber.value;
+
     const emailInfoRequest = {
       sender: name, email, zipcode, phonenumber,
     };
     axios.post('/sendemail', emailInfoRequest);
+
   }
 
   render() {
