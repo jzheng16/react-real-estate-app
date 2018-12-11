@@ -213,6 +213,8 @@ class PlacesAutocomplete extends React.Component {
         {Object.keys(estate).length !== 0
           ? (
             <div>
+              {/* Passing information from our PlacesAutoComplete component about our property to
+               the PropertyInformation component so that it can render it out */}
               <PropertyInformation estate={estate} address={address} savedProperty={this.savedProperty} />
             </div>
           )
