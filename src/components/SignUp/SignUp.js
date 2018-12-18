@@ -53,9 +53,9 @@ class SignUp extends Component {
     return (
       <div>
         <form id="signUp" onSubmit={this.signingUp}>
-          Email: <input type="email" name="emailInput" onChange={this.onEmailChange} />
+          Email: <input type="email" name="emailInput" autoComplete="username" onChange={this.onEmailChange} />
           {/* onChange will run every time the input Changes */}
-          Password: <input type="password" name="passwordInput" onChange={this.onPasswordChange} />
+          Password: <input type="password" name="passwordInput" autoComplete="new-password" onChange={this.onPasswordChange} />
           <button type="submit">SUBMIT</button>
         </form>
         {error ? <div> {error} </div>

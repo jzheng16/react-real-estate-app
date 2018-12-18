@@ -1,42 +1,42 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import history from '../../history';
+import { UserContext } from '../../UserProvider';
+import WithUserContext from '../../WithUserContext';
+
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { emailState: '', passwordState: '' };
+    this.state = { email: '', password: '' };
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.loggingIn = this.loggingIn.bind(this);
   }
 
   onEmailChange(event) {
-    const email = event.target.value;
-    this.setState({ emailState: email });
-    console.log('What is my email state right now???', this.state.emailState);
+    const emailInput = event.target.value;
+    this.setState({ email: emailInput });
   }
 
   onPasswordChange(event) {
-    const password = event.target.value;
-    this.setState({ passwordState: password });
-    console.log(
-      'What is my password state right now???',
-      this.state.passwordState,
-    );
+    const passwordInput = event.target.value;
+    this.setState({ password: passwordInput });
   }
 
   loggingIn(event) {
     event.preventDefault();
-
+    const { email, password } = this.state;
+    const { context: { login } } = this.props;
+    console.log(login);
     axios
       .post('/login', {
-        email: this.state.emailState,
-        password: this.state.passwordState,
+        email,
+        password,
       })
       .then(response => {
-        console.log(response.data);
         if (typeof response.data === 'object') {
+          login(response.data);
           history.push({
             pathname: 'usersavedproperties',
             state: response.data,
@@ -53,24 +53,27 @@ class Login extends Component {
     const { error } = this.state;
     return (
       <div>
-        <form id="Login" onSubmit={this.loggingIn}>
-          Email:
-          <input type="email" name="emailInput" onChange={this.onEmailChange} />
-          {/* onChange will run every time the input Changes */}
-          Password:
-          <input
-            type="password"
-            name="passwordInput"
-            onChange={this.onPasswordChange}
-          />
-          <button type="submit"> Login </button>
-        </form>
-        {/* ternary expression down below: if error, show error, otherwise, show null (nothing) */}
-        {error ? <div>{error}</div> : null}
-        <a href="/signup">Sign Up Here</a>
+        <div>
+          <form id="Login" onSubmit={this.loggingIn}>
+            Email:
+            <input type="email" name="emailInput" autoComplete="username" onChange={this.onEmailChange} />
+            Password:
+            <input
+              type="password"
+              name="passwordInput"
+              autoComplete="current-password"
+              onChange={this.onPasswordChange}
+            />
+            <button type="submit"> Login </button>
+          </form>
+
+          {/* ternary expression down below: if error, show error, otherwise, show null (nothing) */}
+          {error ? <div>{error}</div> : null}
+          <a href="/signup">Sign Up Here</a>
+        </div>
       </div>
     );
   }
 }
 
-export default Login;
+export default WithUserContext(Login);

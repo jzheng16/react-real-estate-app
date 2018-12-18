@@ -13,6 +13,7 @@ class PlacesAutocomplete extends React.Component {
     this.state = {
       address: '',
       estate: {},
+      estate2: {},
       error: '',
       isMarkerShown: false,
       isInfoBoxShown: false,
