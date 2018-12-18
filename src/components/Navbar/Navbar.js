@@ -29,8 +29,8 @@ class Navbar extends Component {
 
       <div className="navbar">
         <UserContext.Consumer>
-          {user => {
-            console.log('What is my user right now?', user);
+          {({ user, login, logout }) => {
+            console.log('What is my user right now?', user, login, logout);
             return (
               <div>
                 {width < 650
@@ -64,7 +64,7 @@ class Navbar extends Component {
                         <li className="nav-item"> <a href="/savedproperties">Saved Properties</a> </li>
                         <li className="nav-item"> <a href="/profile">About Me</a> </li>
                         <li className="nav-item"> <a href="/request">Request</a> </li>
-                        {user.name
+                        {user.email
                           ? <li className="nav-item"> <a href="/logout"> Logout </a> </li>
                           : <li className="nav-item"> <a href="/login"> <i className="fas fa-user-circle" /> </a> </li>
                         }

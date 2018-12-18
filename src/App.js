@@ -6,17 +6,13 @@ import Topstrip from './components/Topstrip';
 import Footer from './components/Footer/Footer';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Topstrip />
-        <Navbar />
-        <Routes />
-        <Footer />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <Topstrip />
+    <Navbar />
+    <Routes />
+    <Footer />
+  </div>
+);
 
 export default App;
