@@ -29,53 +29,50 @@ class Navbar extends Component {
 
       <div className="navbar">
         <UserContext.Consumer>
-          {({ user, login, logout }) => {
-            console.log('What is my user right now?', user, login, logout);
-            return (
-              <div>
-                {width < 650
-                  ? (
-                    <div id="hamburger-icon" onClick={this.toggleMenu} onKeyDown={this.toggleMenu} role="button" tabIndex={0}>
-                      <i className="fas fa-bars" id="ham-icon" />
-                      <div id="login-icon">
-                        <a href="/login"> <i className="fas fa-user-circle" /> </a>
-                      </div>
-                      {menuIsOpen === true ? (
-                        <nav className="toggled-nav">
-                          <ul className="expanded-menu">
-                            <li className="nav-item"> <a href="/"><i className="fas fa-2x fa-home"></i></a> </li>
-                            <li className="nav-item"> <a href="/propertysearch">Property Search</a> </li>
-                            <li className="nav-item"> <a href="/savedproperties">Saved Properties</a> </li>
-                            <li className="nav-item"> <a href="/profile">About Me</a> </li>
-                            <li className="nav-item"> <a href="/request">Request</a> </li>
-
-                          </ul>
-
-                        </nav>
-
-                      ) : null}
+          {({ user, login, logout }) => (
+            <div>
+              {width < 650
+                ? (
+                  <div id="hamburger-icon" onClick={this.toggleMenu} onKeyDown={this.toggleMenu} role="button" tabIndex={0}>
+                    <i className="fas fa-bars" id="ham-icon" />
+                    <div id="login-icon">
+                      <a href="/login"> <i className="fas fa-user-circle" /> </a>
                     </div>
-                  )
-                  : (
-                    <nav>
-                      <ul className="regular-nav">
-                        <li className="nav-item"> <a href="/"><i className="fas fa-2x fa-home"></i></a> </li>
-                        <li className="nav-item"> <a href="/propertysearch">Property Search</a> </li>
-                        <li className="nav-item"> <a href="/savedproperties">Saved Properties</a> </li>
-                        <li className="nav-item"> <a href="/profile">About Me</a> </li>
-                        <li className="nav-item"> <a href="/request">Request</a> </li>
-                        {user.email
-                          ? <li className="nav-item"> <a href="/logout"> Logout </a> </li>
-                          : <li className="nav-item"> <a href="/login"> <i className="fas fa-user-circle" /> </a> </li>
-                        }
+                    {menuIsOpen === true ? (
+                      <nav className="toggled-nav">
+                        <ul className="expanded-menu">
+                          <li className="nav-item"> <a href="/"><i className="fas fa-2x fa-home"></i></a> </li>
+                          <li className="nav-item"> <a href="/propertysearch">Property Search</a> </li>
+                          <li className="nav-item"> <a href="/savedproperties">Saved Properties</a> </li>
+                          <li className="nav-item"> <a href="/profile">About Me</a> </li>
+                          <li className="nav-item"> <a href="/request">Request</a> </li>
 
-                      </ul>
-                    </nav>
+                        </ul>
 
-                  )}
-              </div>
-            );
-          }}
+                      </nav>
+
+                    ) : null}
+                  </div>
+                )
+                : (
+                  <nav>
+                    <ul className="regular-nav">
+                      <li className="nav-item"> <a href="/"><i className="fas fa-2x fa-home"></i></a> </li>
+                      <li className="nav-item"> <a href="/propertysearch">Property Search</a> </li>
+                      <li className="nav-item"> <a href="/savedproperties">Saved Properties</a> </li>
+                      <li className="nav-item"> <a href="/profile">About Me</a> </li>
+                      <li className="nav-item"> <a href="/request">Request</a> </li>
+                      {user.email
+                        ? <li className="nav-item"> <a href="/logout"> Logout </a> </li>
+                        : <li className="nav-item"> <a href="/login"> <i className="fas fa-user-circle" /> </a> </li>
+                      }
+
+                    </ul>
+                  </nav>
+
+                )}
+            </div>
+          )}
 
         </UserContext.Consumer>
       </div>
