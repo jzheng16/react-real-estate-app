@@ -78,7 +78,7 @@ class PropertySearch extends Component {
 
   render() {
     const { estate, address, propertyLat, propertyLng, isMarkerShown, isInfoBoxShown, heading } = this.state;
-    console.log(estate, address);
+    console.log(this.props);
     // destructuring very important for rendering component state, or else we'd have to (below)
     // const markershow=this.state.markerShown
     // const address=this.state.address

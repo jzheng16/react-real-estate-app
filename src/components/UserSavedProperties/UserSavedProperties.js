@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './UserSavedProperties.css';
 import axios from 'axios';
 import shortid from 'shortid';
-import { UserContext } from '../../UserProvider';
+import WithUserContext from '../../WithUserContext';
 
 class UserSavedProperties extends Component {
   constructor(props) {
@@ -22,41 +22,35 @@ class UserSavedProperties extends Component {
 
   render() {
     const { savedProperties } = this.state;
-    const { location } = this.props;
-    console.log('What is react-router sending to us: ', location);
-    console.log('Saved Property information: ', savedProperties);
     return (
       <div className="savedPropertiesContainer">
+        <div>
+          <div> Saved Properties for {}</div>
+          <div className="card-grid">
+            {savedProperties && savedProperties.map(property => (
 
-        <UserContext.Consumer>
-          {user => (
-            <div>
-              <div> Saved Properties for {user.name}</div>
-              <div className="card-grid">
-                {savedProperties && savedProperties.map(property => (
-
-                  <div className="card" key={shortid.generate()}>
-                    <div className="header"> {property.address} </div>
-                    <div className="info">
-                      <div className="info-list">{property.beds}</div>
-                      <div className="info-list">{property.baths}</div>
-                      <div className="info-list">${property.zestimate}</div>
-                    </div>
-                    <button type="button"> <a href="propertsearch"> View Details </a> </button>
-                    <button type="button"> Delete Saved Property </button>
-                  </div>
-
-                ))}
-
-
+              <div className="card" key={shortid.generate()}>
+                <div className="header"> {property.address} </div>
+                <div className="info">
+                  <div className="info-list">{property.beds}</div>
+                  <div className="info-list">{property.baths}</div>
+                  <div className="info-list">${property.zestimate}</div>
+                </div>
+                <button type="button"> <a href="propertsearch"> View Details </a> </button>
+                <button type="button"> Delete Saved Property </button>
               </div>
-            </div>
-          )}
-        </UserContext.Consumer>
+
+            ))}
+
+
+          </div>
+        </div>
+
+
       </div>
 
     );
   }
 }
 
-export default UserSavedProperties;
+export default WithUserContext(UserSavedProperties);

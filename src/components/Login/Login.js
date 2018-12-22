@@ -1,47 +1,36 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import history from '../../history';
-import { UserContext } from '../../UserProvider';
+import './Login.css';
+
 import WithUserContext from '../../WithUserContext';
 
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '' };
-    this.onEmailChange = this.onEmailChange.bind(this);
-    this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.state = { email: '', password: '', error: '' };
+    this.onChange = this.onChange.bind(this);
     this.loggingIn = this.loggingIn.bind(this);
   }
 
-  onEmailChange(event) {
-    const emailInput = event.target.value;
-    this.setState({ email: emailInput });
-  }
-
-  onPasswordChange(event) {
-    const passwordInput = event.target.value;
-    this.setState({ password: passwordInput });
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   loggingIn(event) {
     event.preventDefault();
     const { email, password } = this.state;
     const { context: { login } } = this.props;
-    console.log(login);
     axios
-      .post('/login', {
-        email,
-        password,
-      })
+      .post('/login', { email, password })
       .then(response => {
         if (typeof response.data === 'object') {
           login(response.data);
-          history.push({
-            pathname: 'usersavedproperties',
-            state: response.data,
-          });
+
           // redirecting user to UserSavedProperties page - later to saved properties
+          history.push('/usersavedproperties');
         } else {
           this.setState({ error: response.data });
         }
@@ -52,25 +41,38 @@ class Login extends Component {
     // Destructuring the error property off of this.state
     const { error } = this.state;
     return (
-      <div>
-        <div>
-          <form id="Login" onSubmit={this.loggingIn}>
-            Email:
-            <input type="email" name="emailInput" autoComplete="username" onChange={this.onEmailChange} />
-            Password:
+      <div className="loginContainer">
+        {/* ternary expression down below: if error, show error, otherwise, show null (nothing) */}
+        <form id="Login" onSubmit={this.loggingIn}>
+          {error ? <div id="error-msg">{error}</div> : null}
+          <label className="input-label" htmlFor="email"> Email
             <input
-              type="password"
-              name="passwordInput"
-              autoComplete="current-password"
-              onChange={this.onPasswordChange}
+              style={error ? { border: '1px solid red' } : {}}
+              className="login-input"
+              id="email"
+              type="email"
+              name="email"
+              autoComplete="username"
+              onChange={this.onChange}
             />
-            <button type="submit"> Login </button>
-          </form>
+          </label>
+          {/* onChange will run every time the input Changes */}
+          <label className="input-label" htmlFor="password"> Password
+            <input
+              style={error ? { border: '1px solid red' } : {}}
+              className="login-input"
+              id="password"
+              type="password"
+              name="password"
+              autoComplete="new-password"
+              onChange={this.onChange}
+            />
+          </label>
+          <button id="loginButton" type="submit"> Login </button>
+          <Link id="signup-link" to="/signup">Signup Here</Link>
+        </form>
 
-          {/* ternary expression down below: if error, show error, otherwise, show null (nothing) */}
-          {error ? <div>{error}</div> : null}
-          <a href="/signup">Sign Up Here</a>
-        </div>
+
       </div>
     );
   }

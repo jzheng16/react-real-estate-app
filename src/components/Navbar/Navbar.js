@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Navbar.css';
-import { UserContext } from '../../UserProvider';
+import WithUserContext from '../../WithUserContext';
 
 class Navbar extends Component {
   constructor(props) {
@@ -25,60 +25,61 @@ class Navbar extends Component {
 
   render() {
     const { width, menuIsOpen } = this.state;
+    const { context: { user, logout } } = this.props;
     return (
 
-      <div className="navbar">
-        <UserContext.Consumer>
-          {({ user, login, logout }) => (
-            <div>
-              {width < 650
-                ? (
-                  <div id="hamburger-icon" onClick={this.toggleMenu} onKeyDown={this.toggleMenu} role="button" tabIndex={0}>
-                    <i className="fas fa-bars" id="ham-icon" />
-                    <div id="login-icon">
-                      <a href="/login"> <i className="fas fa-user-circle" /> </a>
-                    </div>
-                    {menuIsOpen === true ? (
-                      <nav className="toggled-nav">
-                        <ul className="expanded-menu">
-                          <li className="nav-item"> <a href="/"><i className="fas fa-2x fa-home"></i></a> </li>
-                          <li className="nav-item"> <a href="/propertysearch">Property Search</a> </li>
-                          <li className="nav-item"> <a href="/savedproperties">Saved Properties</a> </li>
-                          <li className="nav-item"> <a href="/profile">About Me</a> </li>
-                          <li className="nav-item"> <a href="/request">Request</a> </li>
+      <div className="nav-container">
 
-                        </ul>
 
-                      </nav>
-
-                    ) : null}
-                  </div>
-                )
-                : (
-                  <nav>
-                    <ul className="regular-nav">
-                      <li className="nav-item"> <a href="/"><i className="fas fa-2x fa-home"></i></a> </li>
+        {width < 650
+          ? (
+            <div className="mobile-nav">
+              <div id="hamburger-icon" onClick={this.toggleMenu} onKeyDown={this.toggleMenu} role="button" tabIndex={0}>
+                <i className="fas fa-bars" id="ham-icon" />
+                <div id="login-icon">
+                  <a href="/login"> <i className="fas fa-user-circle" /> </a>
+                </div>
+                {menuIsOpen === true ? (
+                  <nav className="toggled-nav">
+                    <ul className="expanded-menu">
+                      <li className="nav-item"> <a href="/">Home</a> </li>
                       <li className="nav-item"> <a href="/propertysearch">Property Search</a> </li>
                       <li className="nav-item"> <a href="/savedproperties">Saved Properties</a> </li>
                       <li className="nav-item"> <a href="/profile">About Me</a> </li>
                       <li className="nav-item"> <a href="/request">Request</a> </li>
-                      {user.email
-                        ? <li className="nav-item"> <a href="/logout"> Logout </a> </li>
-                        : <li className="nav-item"> <a href="/login"> <i className="fas fa-user-circle" /> </a> </li>
-                      }
 
                     </ul>
+
                   </nav>
 
-                )}
+                ) : null}
+              </div>
             </div>
-          )}
+          )
+          : (
+            <div className="navbar">
+              <nav>
+                <ul className="regular-nav">
+                  <li className="nav-item"> <a href="/"><i className="fas fa-2x fa-home"></i></a> </li>
+                  <li className="nav-item"> <a href="/propertysearch">Property Search</a> </li>
+                  <li className="nav-item"> <a href="/savedproperties">Saved Properties</a> </li>
+                  <li className="nav-item"> <a href="/profile">About Me</a> </li>
+                  <li className="nav-item"> <a href="/request">Request</a> </li>
+                  {user.email
+                    ? <li className="nav-item"> <button type="button" onClick={logout}> <i className="fas fa-sign-out-alt"></i> </button> </li>
+                    : <li className="nav-item"> <a href="/login"> <i className="fas fa-user-circle" /> </a> </li>
+                  }
 
-        </UserContext.Consumer>
+                </ul>
+              </nav>
+            </div>
+
+          )}
       </div>
+
 
     );
   }
 }
 
-export default Navbar;
+export default WithUserContext(Navbar);
