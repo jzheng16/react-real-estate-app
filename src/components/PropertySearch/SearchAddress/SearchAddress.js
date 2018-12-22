@@ -100,10 +100,11 @@ class PlacesAutocomplete extends Component {
   }
 
   render() {
+    const { address } = this.props;
     return (
       <div className="places-container">
         <div id="pac-container">
-          <input id="pac-input" type="text" placeholder="Search for a property..." />
+          <input id="pac-input" defaultValue={address} type="text" placeholder="Search for a property..." />
           <button type="button" className="search" onClick={this.searchZillow}> <i className="fas fa-search"></i> </button>
         </div>
       </div>

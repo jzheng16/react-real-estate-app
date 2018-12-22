@@ -9,17 +9,14 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = { email: '', password: '', confirmPassword: '', error: '' };
-    this.onChange = this.onChange.bind(this);
-
-    this.signingUp = this.signingUp.bind(this);
   }
 
-  onChange(event) {
+  onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   }
 
 
-  signingUp(event) {
+  signingUp = event => {
     const { email, password, confirmPassword } = this.state;
     const { context: { login } } = this.props;
     event.preventDefault();

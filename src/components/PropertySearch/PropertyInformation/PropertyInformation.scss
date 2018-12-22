@@ -1,3 +1,18 @@
+.propertyInformationContainer {
+
+}
+
+.item {
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: row;
+   align-items: center;
+    flex: 1;
+
+    text-align: left;
+  width: 200px;
+}
+
 .general-information {
   p {
     text-align: center;
@@ -19,9 +34,16 @@
   margin: 1em .5em .75em 1em;
 }
 
+
 .media-image {
-  margin: auto 0;
+  margin-right: .5em;
   display: inline-block;
+  height: 2em;
+  width: 2em;
+}
+
+.media-image i {
+  font-size: 1.8em;
 }
 
 .fa-bath {
@@ -31,4 +53,61 @@
 .facts-details {
  
   display: inline-block;
+  margin-left: .8em;
+  text-align: left;
 }
+
+.zestimate {
+  margin-left: 1em;
+}
+
+#zestimate-price {
+  display: inline-block;
+  margin-left: .5em;
+  color: #00cc7a;
+}
+
+.ul-list {
+
+  margin: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+
+}
+
+.link-list {
+  padding: 5px;
+  
+  width: max-content;
+}
+
+.link-list:hover .zillow-link {
+  color: black;
+  font-weight: bold;
+}
+
+.link-list::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width .3s;
+}
+
+.link-list:hover::after {
+    width: 100%;
+}
+
+
+.zillow-link{
+  text-decoration: none;
+  color: black;
+  font-size: 1.2em;
+
+}
+
+
+

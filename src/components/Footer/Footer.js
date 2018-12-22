@@ -1,7 +1,7 @@
 import React from 'react';
 import './Footer.css';
 
-export default props => (
+export default () => (
   <footer>
     <div className="companyInfo">
       <img src="https://content.mediastg.net/static/RealEstate/company/298/013-logo.png" alt="" />

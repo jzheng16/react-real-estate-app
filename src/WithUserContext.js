@@ -3,7 +3,7 @@ import { UserContext } from './UserProvider';
 
 const WithUserContext = Component => props => (
   <UserContext.Consumer>
-    {context => <Component context={context} />
+    {context => <Component {...props} context={context} />
     }
   </UserContext.Consumer>
 );

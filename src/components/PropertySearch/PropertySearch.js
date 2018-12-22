@@ -5,6 +5,7 @@ import WithUserContext from '../../WithUserContext';
 import SearchAddress from './SearchAddress/SearchAddress';
 import PropertyInformation from './PropertyInformation/PropertyInformation';
 import { StreetView, StyledMapWithAnInfoBox } from './GoogleMapComponents';
+import './PropertySearch.css';
 
 class PropertySearch extends Component {
   constructor(props) {
@@ -21,38 +22,39 @@ class PropertySearch extends Component {
       heading: 0,
       message: '',
     };
-    this.toggleMarkerInfoBox = this.toggleMarkerInfoBox.bind(this);
-    this.saveProperty = this.saveProperty.bind(this);
-    this.setAddress = this.setAddress.bind(this);
-    this.setProperty = this.setProperty.bind(this);
-    this.setError = this.setError.bind(this);
   }
 
   componentDidMount() {
     console.log('this.props', this.props);
+    const { location: { state } } = this.props;
+
+
+    if (state) {
+      this.setState({ address: state.address, propertyLat: state.propertyLat, propertyLng: state.propertyLng });
+    }
   }
 
 
-  setAddress({ address, propertyLng, propertyLat, heading }) {
+  setAddress = ({ address, propertyLng, propertyLat, heading }) => {
     console.log('address', address, propertyLng);
 
     this.setState({ address, propertyLng, propertyLat, heading });
   }
 
-  setProperty(estate, propertyZpid) {
+  setProperty = (estate, propertyZpid) => {
     console.log(estate, propertyZpid);
     this.setState({ estate, propertyZpid });
   }
 
-  setError(error) {
+  setError = error => {
     this.setState({ errorFindingProperty: error });
   }
 
-  toggleMarkerInfoBox() {
+  toggleMarkerInfoBox = () => {
     this.setState(prevState => ({ isInfoBoxShown: !prevState.isInfoBoxShown }));
   }
 
-  saveProperty(estate, event) {
+  saveProperty = (estate, event) => {
     const { user } = this.props;
     const { bathrooms, bedrooms, zestimate, address } = estate;
     event.preventDefault();
@@ -78,7 +80,7 @@ class PropertySearch extends Component {
 
   render() {
     const { estate, address, propertyLat, propertyLng, isMarkerShown, isInfoBoxShown, heading } = this.state;
-    console.log(this.props);
+
     // destructuring very important for rendering component state, or else we'd have to (below)
     // const markershow=this.state.markerShown
     // const address=this.state.address
@@ -86,7 +88,7 @@ class PropertySearch extends Component {
     // const propertyLat=this.state.propertyLat
 
     return (
-      <div>
+      <div className="propertySearchContainer">
         <SearchAddress
           {...this.state}
           setAddress={this.setAddress}
