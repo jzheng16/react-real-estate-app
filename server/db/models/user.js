@@ -1,4 +1,5 @@
 // We have to create the user Schema
+/* eslint-disable */
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
@@ -42,13 +43,16 @@ UserSchema.pre('save', function (next) {
 });
 
 
-UserSchema.methods.comparePassword = function (candidatePassword) {
-  return bcrypt.compare(candidatePassword, this.password)
-    .then(isMatch => {
-      console.log('matching?', isMatch);
-      return isMatch;
-    });
+// UserSchema.methods.comparePassword = function (candidatePassword) {
+//   bcrypt.compare(candidatePassword, this.password)
+//     .then(isMatch => (!!isMatch));
+// };
+
+
+UserSchema.methods.comparePassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
 };
+
 
 const User = mongoose.model('User', UserSchema);
 

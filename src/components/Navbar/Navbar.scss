@@ -1,4 +1,22 @@
+.mobile-nav {
+  background-color: rgb(231, 232, 233);
+  height: 42px;
+  display: flex;
+  align-items: center;
+
+  position: sticky;
+  top: 0;
+  flex-direction: row;
+  background-color: white;
+  z-index: 3;
+
+  ul {
+    padding-left: 0;
+  }
+}
+
 .navbar {
+  background-color: rgb(231, 232, 233);
   height: 42px;
   display: flex;
   align-items: center;
@@ -21,9 +39,8 @@
 }
 
 #hamburger-icon {
-  
-  text-align: left;
-  margin-left: 2em;
+    margin-left: 1em;
+ 
 }
 
 .expanded-menu {

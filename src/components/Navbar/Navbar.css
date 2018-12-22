@@ -1,4 +1,18 @@
+.mobile-nav {
+  background-color: #e7e8e9;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  flex-direction: row;
+  background-color: white;
+  z-index: 3; }
+  .mobile-nav ul {
+    padding-left: 0; }
+
 .navbar {
+  background-color: #e7e8e9;
   height: 42px;
   display: flex;
   align-items: center;
@@ -16,8 +30,7 @@
   margin-left: 12em; }
 
 #hamburger-icon {
-  text-align: left;
-  margin-left: 2em; }
+  margin-left: 1em; }
 
 .expanded-menu {
   transition: all .5s ease-in-out;

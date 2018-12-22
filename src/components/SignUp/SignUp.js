@@ -1,69 +1,105 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import history from '../../history';
+import WithUserContext from '../../WithUserContext';
+import './SignUp.css';
+
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
-    this.state = { emailState: '', passwordState: '', error: '' };
-    this.onEmailChange = this.onEmailChange.bind(this);
-    this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.state = { email: '', password: '', confirmPassword: '', error: '' };
+    this.onChange = this.onChange.bind(this);
+
     this.signingUp = this.signingUp.bind(this);
   }
 
-  onEmailChange(event) {
-    const email = event.target.value;
-    const { emailState } = this.state;
-    this.setState({ emailState: email });
-    console.log('email: ', emailState);
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
-  onPasswordChange(event) {
-    const password = event.target.value;
-    const { passwordState } = this.state;
-    this.setState({ passwordState: password });
-    console.log('password: ', passwordState);
-  }
 
   signingUp(event) {
-    const { emailState, passwordState } = this.state;
+    const { email, password, confirmPassword } = this.state;
+    const { context: { login } } = this.props;
     event.preventDefault();
-
-    // axios is communicating with the server to make the call
-    axios
-      .post('/signup', { email: emailState, password: passwordState })
-      .then(response => {
-        if (typeof response.data === 'object') {
-          const user = response.data;
-          // redirecting user to home page - later to saved properties
-          history.push({
-            pathname: '/',
-            state: user,
-          });
-        } else {
-          const error = response.data;
-          this.setState({ error });
-        }
-      });
+    if (password !== confirmPassword) {
+      this.setState({ error: 'Passwords must match' });
+    } else {
+      // axios is communicating with the server to make the call
+      axios
+        .post('/signup', { email, password })
+        .then(response => {
+          if (typeof response.data === 'object') {
+            const user = response.data;
+            login(user);
+            // redirecting user to home page - later to saved properties
+            history.push('/');
+          } else {
+            const error = response.data;
+            this.setState({ error });
+          }
+        })
+        .catch(err => console.error(err));
+    }
   }
 
 
   render() {
-    const { error } = this.state;
+    const { error, password, confirmPassword, email } = this.state;
+    console.log('signup props', this.props);
+
     return (
-      <div>
+      <div className="signUpContainer">
         <form id="signUp" onSubmit={this.signingUp}>
-          Email: <input type="email" name="emailInput" autoComplete="username" onChange={this.onEmailChange} />
+          {error ? <div id="error-msg"> {error} </div>
+            : null
+          }
+          <label htmlFor="email"> Email
+            <input
+              className="signup-input"
+              id="email"
+              type="email"
+              name="email"
+              autoComplete="username"
+              onChange={this.onChange}
+            />
+          </label>
           {/* onChange will run every time the input Changes */}
-          Password: <input type="password" name="passwordInput" autoComplete="new-password" onChange={this.onPasswordChange} />
-          <button type="submit">SUBMIT</button>
+          <label htmlFor="password"> Password
+            <input
+              className="signup-input"
+              style={password && confirmPassword && password !== confirmPassword ? { border: '1px solid red' } : {}}
+              id="password"
+              type="password"
+              name="password"
+              autoComplete="new-password"
+              onChange={this.onChange}
+            />
+          </label>
+          <label htmlFor="confirmPassword"> Confirm Password
+            <input
+              className="signup-input"
+              style={password && confirmPassword && password !== confirmPassword ? { border: '1px solid red' } : {}}
+              id="confirmPassword"
+              type="password"
+              name="confirmPassword"
+              autoComplete="new-password"
+              onChange={this.onChange}
+            />
+          </label>
+          <button
+            id="signUpButton"
+            type="submit"
+          >
+            Register
+          </button>
         </form>
-        {error ? <div> {error} </div>
-          : null
-        }
+
+
       </div>
     );
   }
 }
 
-export default SignUp;
+export default WithUserContext(SignUp);
