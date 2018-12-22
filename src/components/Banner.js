@@ -6,6 +6,8 @@ class Banner extends Component {
     super(props);
     this.state = {
       address: '',
+      propertyLat: 0,
+      propertyLng: 0,
     };
     this.searchAddress = this.searchAddress.bind(this);
   }
@@ -16,18 +18,25 @@ class Banner extends Component {
 
     autoComplete.addListener('place_changed', () => {
       const place = autoComplete.getPlace();
+      const { geometry: { location }, formatted_address } = place;
       this.setState({
-        address: place.formatted_address,
+        address: formatted_address,
+        propertyLng: location.lng(),
+        propertyLat: location.lat(),
       });
     });
   }
 
-  searchAddress(event) {
-    const { address } = this.state;
+  searchAddress = event => {
+    const { address, propertyLat, propertyLng } = this.state;
     event.preventDefault();
     history.push({
-      pathname: 'propertysearch',
-      state: address,
+      pathname: '/propertysearch',
+      state: {
+        address,
+        propertyLng,
+        propertyLat,
+      },
     });
   }
 

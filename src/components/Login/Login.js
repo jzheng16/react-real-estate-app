@@ -11,15 +11,13 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = { email: '', password: '', error: '' };
-    this.onChange = this.onChange.bind(this);
-    this.loggingIn = this.loggingIn.bind(this);
   }
 
-  onChange(event) {
+  onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  loggingIn(event) {
+  loggingIn = event => {
     event.preventDefault();
     const { email, password } = this.state;
     const { context: { login } } = this.props;

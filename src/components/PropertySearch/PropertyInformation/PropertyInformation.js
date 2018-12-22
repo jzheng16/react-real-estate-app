@@ -11,10 +11,10 @@ export default props => {
 
   // More efficient way: Destructuring
   const { address, estate } = props;
-
+  console.log(estate);
 
   return (
-    <div className="property-information">
+    <div className="propertyInformationContainer">
       <div className="address"> {address} </div>
       <div className="general-information">
         <p> Facts and Features </p>
@@ -22,7 +22,7 @@ export default props => {
           <div className="column-1">
 
 
-            <div>
+            <div className="item">
               <div className="media-image">
                 <i className="fas fa-bath"></i>
               </div>
@@ -33,7 +33,7 @@ export default props => {
             </div>
 
 
-            <div>
+            <div className="item">
               <div className="media-image">
                 <i className="fas fa-bed"></i>
               </div>
@@ -44,7 +44,7 @@ export default props => {
             </div>
 
 
-            <div>
+            <div className="item">
               <div className="media-image">
                 <i className="fas fa-expand-arrows-alt" />
               </div>
@@ -60,7 +60,7 @@ export default props => {
 
           <div className="column-2">
 
-            <div>
+            <div className="item">
               <div className="media-image">
                 <i className="far fa-calendar" />
               </div>
@@ -70,7 +70,7 @@ export default props => {
               </div>
             </div>
 
-            <div>
+            <div className="item">
               <div className="media-image">
                 <i className="fas fa-home" />
               </div>
@@ -80,13 +80,13 @@ export default props => {
               </div>
             </div>
 
-            <div>
+            <div className="item">
               <div className="media-image">
                 <i className="fas fa-expand" />
               </div>
               <div className="facts-details">
                 <div className="lotSizeSqFt"> Lot Size </div>
-                <div> {estate.lotSizeSqFt || 'No Data'} </div>
+                <div> {estate.lotSizeSqFt || 'No Data'} sqft </div>
               </div>
             </div>
 
@@ -94,15 +94,29 @@ export default props => {
           </div>
         </div>
         <div className="zestimate">
-          Zestimate&reg; {estate.zestimate && typeof estate.zestimate.amount === 'number' && estate.zestimate.amount}
+          Zestimate&reg;
+          <span id="zestimate-price">
+            ${estate.zestimate && typeof estate.zestimate.amount === 'string' && estate.zestimate.amount}
+          </span>
         </div>
 
       </div>
       <div className="property-links">
-        <a href={estate.links && estate.links.comparables} target="_blank" rel="noopener noreferrer"> Comparables </a>
-        <a href={estate.links && estate.links.graphsanddata} target="_blank" rel="noopener noreferrer"> Graphs And Data </a>
-        <a href={estate.links && estate.links.homedetails} target="_blank" rel="noopener noreferrer"> Home Details</a>
-        <a href={estate.links && estate.links.mapthishome} target="_blank" rel="noopener noreferrer">View Property</a>
+        <p> Related Links </p>
+        <ul className="ul-list">
+          <li className="link-list">
+            <a className="zillow-link" href={estate.links && estate.links.comparables} target="_blank" rel="noopener noreferrer"> Comparables </a>
+          </li>
+          <li className="link-list">
+            <a className="zillow-link" href={estate.links && estate.links.graphsanddata} target="_blank" rel="noopener noreferrer"> Graphs And Data </a>
+          </li>
+          <li className="link-list">
+            <a className="zillow-link" href={estate.links && estate.links.homedetails} target="_blank" rel="noopener noreferrer"> Home Details</a>
+          </li>
+          <li className="link-list">
+            <a className="zillow-link" href={estate.links && estate.links.mapthishome} target="_blank" rel="noopener noreferrer">View Property</a>
+          </li>
+        </ul>
       </div>
 
       {/* We need to pass in information about our property through this button so that our main component PAC receives it */}
