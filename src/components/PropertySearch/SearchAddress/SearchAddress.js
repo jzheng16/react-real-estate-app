@@ -52,6 +52,10 @@ class PlacesAutocomplete extends Component {
 
   searchZillow() {
     const { address, setProperty, setError } = this.props;
+
+    // Clear previous search first?
+    setProperty({}, 0);
+
     const formattedAddress = address.split(',');
     const streetAddress = formattedAddress[0];
     const formattedStreetAddress = streetAddress.replace('-', '');
@@ -102,12 +106,11 @@ class PlacesAutocomplete extends Component {
   render() {
     const { address } = this.props;
     return (
-      <div className="places-container">
-        <div id="pac-container">
-          <input id="pac-input" defaultValue={address} type="text" placeholder="Search for a property..." />
-          <button type="button" className="search" onClick={this.searchZillow}> <i className="fas fa-search"></i> </button>
-        </div>
+      <div className="pac">
+        <input id="pac-input" defaultValue={address} type="text" placeholder="Search for a property..." />
+        <button type="button" className="search" onClick={this.searchZillow}> <i className="fas fa-search"></i> </button>
       </div>
+
     );
   }
 }

@@ -2,12 +2,9 @@ import React from 'react';
 import './PropertyInformation.css';
 
 export default props => {
-  console.log('What is being passed down to me from PlacesAutocomplete.js? ', props);
-
   // Long way of grabbing values off prop object
   // const address = props.address;
   // const property = props.estate;
-
 
   // More efficient way: Destructuring
   const { address, estate } = props;
@@ -120,7 +117,7 @@ export default props => {
       </div>
 
       {/* We need to pass in information about our property through this button so that our main component PAC receives it */}
-      <button type="button" onClick={event => props.savedProperty(estate.bathrooms, estate.bedrooms, estate.zestimate.amount, address, event)}> Save Property </button>
+      <button type="button" onClick={event => props.saveProperty(estate, address, event)}> Save Property </button>
 
     </div>
   );

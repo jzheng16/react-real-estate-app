@@ -41,7 +41,10 @@ module.exports = {
     'quote-props': 0,
     'react/jsx-one-expression-per-line': 0,
     'class-methods-use-this': 0,
-    'object-curly-newline': ["error", { "consistent": true }]
+    'object-curly-newline': ["error", { "consistent": true }],
+    "prefer-destructuring": 0,
+    "react/destructuring-assignment": 0,
+    "no-underscore-dangle": 0
   },
   overrides: [
     {
