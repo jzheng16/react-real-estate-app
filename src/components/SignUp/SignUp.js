@@ -25,7 +25,7 @@ class SignUp extends Component {
     } else {
       // axios is communicating with the server to make the call
       axios
-        .post('/signup', { email, password })
+        .post('/api/user/signup', { email, password })
         .then(response => {
           if (typeof response.data === 'object') {
             const user = response.data;

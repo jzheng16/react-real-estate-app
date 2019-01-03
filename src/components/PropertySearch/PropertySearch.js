@@ -7,13 +7,14 @@ import PropertyInformation from './PropertyInformation/PropertyInformation';
 import { StreetView, StyledMapWithAnInfoBox } from './GoogleMapComponents';
 import './PropertySearch.css';
 
+// TODO:  Display markers for similar properties and show property information for each marker
+
 class PropertySearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
       address: '',
       estate: {},
-      errorFindingProperty: '',
       isMarkerShown: false,
       isInfoBoxShown: false,
       propertyLng: 0,
@@ -47,7 +48,17 @@ class PropertySearch extends Component {
   }
 
   setError = error => {
-    this.setState({ errorFindingProperty: error });
+    // If zillow couldn't find the address
+    if (error === 'Error: no exact match found for input address') {
+      this.setState({ message: 'No exact match found! Please try again!' });
+    } else {
+      this.setState({ message: 'Zillow API Error: Please try again' });
+    }
+
+
+    setTimeout(() => {
+      this.setState({ message: '' });
+    }, 3000);
   }
 
   toggleMarkerInfoBox = () => {
@@ -76,9 +87,6 @@ class PropertySearch extends Component {
         }
       })
       .catch(err => console.log('error', err));
-    setTimeout(() => {
-      this.setState({ message: '' });
-    }, 3000);
   }
 
   render() {
@@ -94,10 +102,12 @@ class PropertySearch extends Component {
 
       <div className="propertySearchContainer">
         <div className="message"> {message} </div>
+
         <SearchAddress
           {...this.state}
           setAddress={this.setAddress}
           setProperty={this.setProperty}
+          setError={this.setError}
         />
         {propertyLat && propertyLng
           ? (

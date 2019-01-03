@@ -11,7 +11,7 @@ export default () => (
       <div className="office-address-info">
         12 Park Lane Dr
         <br /> Oldtown Circle, PA. 19073
-        <br /> Office Phone: (515)233-5142
+        <br /> © Zillow, Inc., 2006-2016
       </div>
     </div>
 

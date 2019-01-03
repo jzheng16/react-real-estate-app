@@ -22,7 +22,7 @@ class Login extends Component {
     const { email, password } = this.state;
     const { context: { login } } = this.props;
     axios
-      .post('/login', { email, password })
+      .post('/api/user/login', { email, password })
       .then(response => {
         if (typeof response.data === 'object') {
           login(response.data);

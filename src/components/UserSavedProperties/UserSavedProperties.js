@@ -7,7 +7,7 @@ import WithUserContext from '../../WithUserContext';
 class UserSavedProperties extends Component {
   // Refetch all properties
   componentDidMount() {
-    axios.get('/me')
+    axios.get('/api/user/me')
       .then(user => {
         if (Object.keys(user.data).length > 0) {
           this.props.context.login(user.data);
