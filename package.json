@@ -10,13 +10,15 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
     "nodemon": "^1.18.5",
-    "react-scripts": "2.0.5"
+    "react-scripts": "^2.1.2"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
+    "connect-mongo": "^2.0.3",
     "cors": "^2.8.4",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "google-map-react": "^1.0.9",
     "history": "^4.7.2",
     "mongoose": "^5.3.13",

@@ -54,9 +54,9 @@ class PropertySearch extends Component {
     this.setState(prevState => ({ isInfoBoxShown: !prevState.isInfoBoxShown }));
   }
 
-  saveProperty = (estate, event) => {
-    const { user } = this.props;
-    const { bathrooms, bedrooms, zestimate, address } = estate;
+  saveProperty = (estate, address, event) => {
+    const { context: { user } } = this.props;
+    const { bathrooms, bedrooms, zestimate } = estate;
     event.preventDefault();
 
     if (!user) {
@@ -68,7 +68,7 @@ class PropertySearch extends Component {
 
     axios.post('/saveProperty', { bathrooms, bedrooms, zestimate: zestimate.amount, address })
       .then(response => {
-        if (response.data === 'Property successfully saved') {
+        if (response.data === 'Property successfully saved' || 'Property already saved!') {
           // Set timeout to display a quick toast?
           this.setState({ message: response.data });
         } else {
@@ -76,10 +76,13 @@ class PropertySearch extends Component {
         }
       })
       .catch(err => console.log('error', err));
+    setTimeout(() => {
+      this.setState({ message: '' });
+    }, 3000);
   }
 
   render() {
-    const { estate, address, propertyLat, propertyLng, isMarkerShown, isInfoBoxShown, heading } = this.state;
+    const { estate, address, propertyLat, propertyLng, isMarkerShown, isInfoBoxShown, heading, message } = this.state;
 
     // destructuring very important for rendering component state, or else we'd have to (below)
     // const markershow=this.state.markerShown
@@ -88,7 +91,9 @@ class PropertySearch extends Component {
     // const propertyLat=this.state.propertyLat
 
     return (
+
       <div className="propertySearchContainer">
+        <div className="message"> {message} </div>
         <SearchAddress
           {...this.state}
           setAddress={this.setAddress}

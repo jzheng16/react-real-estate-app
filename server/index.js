@@ -3,6 +3,9 @@ const path = require('path');
 const cors = require('cors');
 const passport = require('passport');
 const nodemailer = require('nodemailer');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require('mongoose');
 
 const app = express();
 const axios = require('axios');
@@ -21,18 +24,25 @@ db.once('open', () => {
 });
 
 
+// Create a session for each request Session Middleware
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'test secret only for development',
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+}));
+
+
 // Passport middleware
 
 passport.serializeUser((user, cb) => {
-  console.log('user?', user);
   cb(null, user._id);
 });
 
 passport.deserializeUser((id, cb) => {
-  User.findById(id, (err, user) => {
-    console.log('user', user);
-    cb(err, user);
-  });
+  User.findById(id)
+    .then(user => cb(null, user))
+    .catch(err => cb(err));
 });
 
 
@@ -67,15 +77,14 @@ app.post('/login', (req, res, next) => {
 
 // Signup
 // Email and a password
-app.post('/signup', (req, res) => {
+app.post('/signup', (req, res, next) => {
   // req.body.email req.body.password
   User.findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
         User.create({ email: req.body.email, password: req.body.password })
           .then(newUser => {
-            console.log('Successfully created new user!', newUser);
-            res.json(newUser);
+            req.login(newUser, err => (err ? next(err) : res.json(newUser)));
           });
       } else {
         res.json('Sorry email is in use, please try again');
@@ -106,9 +115,9 @@ app.get('/deepComparables/:zpid', (req, res) => {
 app.post('/saveProperty', (req, res) => {
   console.log('what are we getting back from our req?', req.body);
   User.updateOne(
-    { 'email': 'joey@joey.com' },
+    { 'email': req.user.email, 'savedProperties.address': { $ne: req.body.address } },
     {
-      '$push': {
+      '$addToSet': {
         'savedProperties': {
           'zestimate': req.body.zestimate,
           'address': req.body.address,
@@ -116,18 +125,18 @@ app.post('/saveProperty', (req, res) => {
       },
     },
   )
-    .then(() => res.json('Property successfully saved'))
+    .then(response => {
+      console.log('What is response: ', response);
+      // Response.n denotes if our saved properties was modified or not
+      if (response.n) {
+        res.json('Property successfully saved');
+      } else {
+        res.json('Property already saved!');
+      }
+    })
     .catch(err => console.log(err));
 });
 
-app.get('/getSavedProperties', (req, res) => {
-  User.findOne(
-    { email: 'joey@joey.com' },
-  )
-    .then(user => {
-      res.json(user);
-    });
-});
 
 app.post('/sendemail', (req, res) => {
   console.log(req.body.sender, req.body.email, req.body.zipcode, req.body.phonenumber);
@@ -149,9 +158,20 @@ app.post('/sendemail', (req, res) => {
   };
 
   transport.sendMail(message, (error, info) => {
-    console.log('success');
-    res.json('success');
+    if (error) console.log('Error sending email: ', error);
+    res.json(info);
   });
+});
+
+app.get('/me', (req, res) => {
+  console.log('user', req.user);
+  res.json(req.user);
+});
+
+app.get('/logout', (req, res) => {
+  req.logout(); // Clear req.user object
+  req.session.destroy();
+  res.json('Successfully logged out');
 });
 
 

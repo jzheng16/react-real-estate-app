@@ -43,8 +43,8 @@ class SignUp extends Component {
 
 
   render() {
-    const { error, password, confirmPassword, email } = this.state;
-    console.log('signup props', this.props);
+    const { error, password, confirmPassword } = this.state;
+
 
     return (
       <div className="signUpContainer">

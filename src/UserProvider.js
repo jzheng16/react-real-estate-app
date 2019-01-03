@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-
+import axios from 'axios';
+import history from './history';
 // Create state that all components will have access (UserContext is the product we will sell)
 export const UserContext = React.createContext();
 
@@ -14,12 +14,25 @@ class UserProvider extends Component {
     this.logout = this.logout.bind(this);
   }
 
+  componentDidMount() {
+    axios.get('/me')
+      .then(user => {
+        if (Object.keys(user.data).length > 0) {
+          console.log('user', user.data);
+          this.setState({ user: user.data });
+        }
+      });
+  }
+
   login(user) {
     this.setState({ user });
   }
 
   logout() {
+    axios.get('/logout')
+      .catch(err => console.error('error logging out', err));
     this.setState({ user: {} });
+    history.push('/');
   }
 
   render() {
