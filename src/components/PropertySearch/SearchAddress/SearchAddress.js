@@ -13,7 +13,12 @@ class PlacesAutocomplete extends Component {
     const { setAddress, propertyLat, propertyLng, heading } = this.props;
     // initialize the autocomplete functionality using the #pac-input input box
     const inputNode = document.getElementById('pac-input');
-    const autoComplete = new window.google.maps.places.Autocomplete(inputNode);
+    // Only return places with a specific address?
+    const options = {
+      types: ['address'],
+      componentRestrictions: { country: 'us' },
+    };
+    const autoComplete = new window.google.maps.places.Autocomplete(inputNode, options);
 
     autoComplete.addListener('place_changed', () => {
       const place = autoComplete.getPlace();
@@ -50,6 +55,7 @@ class PlacesAutocomplete extends Component {
     });
   }
 
+  // TODO: Clean up janky address formatting function
   searchZillow() {
     const { address, setProperty, setError } = this.props;
 
@@ -74,7 +80,7 @@ class PlacesAutocomplete extends Component {
     // console.log('Final address: ', finalAddress);
     // console.log('Final formattedCityStateZip: ', finalCityStateZip);
     axios
-      .get(`/deepSearchResults/${finalAddress}/${finalCityStateZip}`)
+      .get(`/api/zillow/deepSearch/${finalAddress}/${finalCityStateZip}`)
       .then(response => {
         const xmlDOM = new DOMParser().parseFromString(
           response.data,
@@ -89,7 +95,7 @@ class PlacesAutocomplete extends Component {
           const estate = json['SearchResults:searchresults'].response.results.result;
           setProperty(estate, estate.zpid);
           axios
-            .get(`/deepComparables/${estate.zpid}`)
+            .get(`/api/zillow/deepComparables/${estate.zpid}`)
             .then(similarProperties => {
               const xml = new DOMParser().parseFromString(
                 similarProperties.data,

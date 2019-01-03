@@ -15,7 +15,7 @@ class UserProvider extends Component {
   }
 
   componentDidMount() {
-    axios.get('/me')
+    axios.get('/api/user/me')
       .then(user => {
         if (Object.keys(user.data).length > 0) {
           console.log('user', user.data);
@@ -29,7 +29,7 @@ class UserProvider extends Component {
   }
 
   logout() {
-    axios.get('/logout')
+    axios.get('/api/user/logout')
       .catch(err => console.error('error logging out', err));
     this.setState({ user: {} });
     history.push('/');
