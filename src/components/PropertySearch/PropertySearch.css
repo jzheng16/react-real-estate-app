@@ -1,2 +1,32 @@
 .propertySearchContainer {
   min-height: 100vh; }
+
+.propertyDisplay {
+  width: 100%;
+  margin-bottom: 1em; }
+
+@media only screen and (max-width: 1000px) {
+  .propertyDisplay {
+    margin: 0 auto;
+    max-width: 650px; } }
+
+@media only screen and (min-width: 1000px) {
+  .propertyDisplay {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; }
+  #street-view {
+    width: 450px;
+    margin-right: 1em; }
+  #googleMap {
+    width: 450px;
+    margin-left: 1em; } }
+
+@media only screen and (min-width: 1400px) {
+  #street-view {
+    width: 600px;
+    margin-right: 1em; }
+  #googleMap {
+    width: 600px;
+    margin-left: 1em; } }

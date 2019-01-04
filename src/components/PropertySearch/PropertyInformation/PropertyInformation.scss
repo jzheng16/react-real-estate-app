@@ -1,6 +1,8 @@
 .propertyInformationContainer {
-
+  max-width: 1400px;
 }
+
+
 
 .item {
   margin-bottom: 1em;
@@ -58,7 +60,60 @@
 }
 
 .zestimate {
-  margin-left: 1em;
+ 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin: 0;
+    height: 100%;
+    font-size: 1.2em;
+    margin-right: 1em;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  button {
+  display: inline-block;
+  background-color: #00cc7a;
+  border-radius: 10px;
+  border:none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 14px;
+  padding: 10px;
+  width: 12em;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:hover span {
+  padding-right: 25px;
+}
+
+button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+  
 }
 
 #zestimate-price {
@@ -109,5 +164,12 @@
 
 }
 
+
+@media only screen and (min-width: 1000px) {
+  .propertyInformationContainer {
+    margin: 0 auto;
+    width: 80%; 
+  }
+}
 
 

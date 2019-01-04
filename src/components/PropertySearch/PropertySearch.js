@@ -7,8 +7,6 @@ import PropertyInformation from './PropertyInformation/PropertyInformation';
 import { StreetView, StyledMapWithAnInfoBox } from './GoogleMapComponents';
 import './PropertySearch.css';
 
-// TODO:  Display markers for similar properties and show property information for each marker
-
 class PropertySearch extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +20,8 @@ class PropertySearch extends Component {
       propertyZpid: 0,
       heading: 0,
       message: '',
+      comparables: [],
+      isComparableShown: [],
     };
   }
 
@@ -37,8 +37,6 @@ class PropertySearch extends Component {
 
 
   setAddress = ({ address, propertyLng, propertyLat, heading }) => {
-    console.log('address', address, propertyLng);
-
     this.setState({ address, propertyLng, propertyLat, heading });
   }
 
@@ -63,9 +61,28 @@ class PropertySearch extends Component {
 
   toggleMarkerInfoBox = () => {
     this.setState(prevState => ({ isInfoBoxShown: !prevState.isInfoBoxShown }));
+    this.setState({ isComparableShown: new Array(this.state.comparables.length).fill(false) });
+  }
+
+  toggleComparableMarkers = index => {
+    const { isComparableShown } = this.state;
+    const toggleComparable = isComparableShown.map((isShown, idx) => {
+      console.log(index, idx, isShown);
+      if (index === idx) {
+        return !isShown;
+      }
+      return false;
+    });
+    this.setState({ isComparableShown: toggleComparable, isInfoBoxShown: false });
+  }
+
+  setComparables = comparables => {
+    const newComparables = comparables.map(comparable => ({ ...comparable, isShown: false }));
+    this.setState({ comparables: newComparables, isComparableShown: new Array(newComparables.length).fill(false) });
   }
 
   saveProperty = (estate, address, event) => {
+    // TODO: Do i need estate and address if I already have it in my local state? Prob not
     const { context: { user } } = this.props;
     const { bathrooms, bedrooms, zestimate } = estate;
     event.preventDefault();
@@ -90,7 +107,8 @@ class PropertySearch extends Component {
   }
 
   render() {
-    const { estate, address, propertyLat, propertyLng, isMarkerShown, isInfoBoxShown, heading, message } = this.state;
+    const { estate, address, propertyLat, propertyLng, comparables, isComparableShown,
+      isMarkerShown, isInfoBoxShown, heading, message } = this.state;
 
     // destructuring very important for rendering component state, or else we'd have to (below)
     // const markershow=this.state.markerShown
@@ -108,6 +126,7 @@ class PropertySearch extends Component {
           setAddress={this.setAddress}
           setProperty={this.setProperty}
           setError={this.setError}
+          setComparables={this.setComparables}
         />
         {propertyLat && propertyLng
           ? (
@@ -122,11 +141,16 @@ class PropertySearch extends Component {
 
               <div id="googleMap">
                 <StyledMapWithAnInfoBox
-                  toggleMarkerInfoBox={this.toggleMarkerInfoBox}
+                  address={address}
+                  estate={estate}
                   propertyLat={propertyLat}
                   propertyLng={propertyLng}
                   isMarkerShown={isMarkerShown}
                   isInfoBoxShown={isInfoBoxShown}
+                  comparables={comparables}
+                  isComparableShown={isComparableShown}
+                  toggleComparableMarkers={this.toggleComparableMarkers}
+                  toggleMarkerInfoBox={this.toggleMarkerInfoBox}
                 />
               </div>
             </div>

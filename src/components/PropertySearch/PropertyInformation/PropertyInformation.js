@@ -8,7 +8,6 @@ export default props => {
 
   // More efficient way: Destructuring
   const { address, estate } = props;
-  console.log(estate);
 
   return (
     <div className="propertyInformationContainer">
@@ -91,10 +90,15 @@ export default props => {
           </div>
         </div>
         <div className="zestimate">
-          Zestimate&reg;
-          <span id="zestimate-price">
-            ${estate.zestimate && typeof estate.zestimate.amount === 'string' && estate.zestimate.amount}
-          </span>
+          <p>  Zestimate&reg;:
+            <span id="zestimate-price">
+              ${estate.zestimate && typeof estate.zestimate.amount === 'string' && estate.zestimate.amount}
+            </span>
+          </p>
+
+
+          {/* We need to pass in information about our property through this button so that our main component PAC receives it */}
+          <button type="button" onClick={event => props.saveProperty(estate, address, event)}> <span>Save Property &#8594;</span> </button>
         </div>
 
       </div>
@@ -115,9 +119,6 @@ export default props => {
           </li>
         </ul>
       </div>
-
-      {/* We need to pass in information about our property through this button so that our main component PAC receives it */}
-      <button type="button" onClick={event => props.saveProperty(estate, address, event)}> Save Property </button>
 
     </div>
   );

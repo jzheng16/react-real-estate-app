@@ -57,7 +57,7 @@ class PlacesAutocomplete extends Component {
 
   // TODO: Clean up janky address formatting function
   searchZillow() {
-    const { address, setProperty, setError } = this.props;
+    const { address, setProperty, setError, setComparables } = this.props;
 
     // Clear previous search first?
     setProperty({}, 0);
@@ -102,6 +102,8 @@ class PlacesAutocomplete extends Component {
                 'text/xml',
               );
               const comparables = convertXMLtoJson(xml);
+              console.log(comparables['Comps:comps'].response.properties.comparables.comp);
+              setComparables(comparables['Comps:comps'].response.properties.comparables.comp);
               console.log('Similar properties: ', comparables);
             });
         }

@@ -1,0 +1,47 @@
+.infobox-container {
+  margin: 0;
+  background-color: white;
+  opacity: 1;
+  width: 231px;
+  padding-top: .5em;
+  position: relative; }
+
+.google-address {
+  margin: 0;
+  font-size: 14px;
+  width: 180px;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden; }
+  .google-address p {
+    margin: 0;
+    margin-left: 10px;
+    margin-bottom: 1em;
+    font-weight: bold;
+    margin-right: 10px; }
+
+.toggle-info-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 37px;
+  height: 33px;
+  opacity: .6;
+  cursor: pointer;
+  border: none;
+  overflow: hidden;
+  outline: none;
+  font-size: 12px; }
+
+.google-property-list {
+  width: 180px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 10px;
+  color: #333;
+  overflow: hidden;
+  padding-bottom: 1em;
+  font-family: 'Roboto', sans-serif; }
+  .google-property-list li:last-child {
+    color: #00cc7a; }
