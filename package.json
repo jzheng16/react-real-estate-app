@@ -36,7 +36,8 @@
     "xml-js": "^1.6.8"
   },
   "scripts": {
-    "start": "concurrently --kill-others \"nodemon server/index.js\" \"react-scripts start\"",
+    "start": "concurrently --kill-others \"node server/index.js\" \"react-scripts start\"",
+    "start-dev": "concurrently --kill-others \"nodemon server/index.js\" \"react-scripts start\"",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "build": "react-scripts build",
