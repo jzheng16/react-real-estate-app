@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const axios = require('axios');
-const config = require('../../config');
+
 
 const API_KEY = config.ZILLOW_API_KEY;
+
 
 
 router.get('/deepSearch/:address/:citystatezip', (req, res) => {
