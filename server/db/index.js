@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
-const { MLAB_USER, MLAB_PASSWORD } = require('../../config');
+const config = require('../../config');
+
+const MLAB_USER = process.env.MLAB_USER || config.MLAB_USER;
+const MLAB_PASSWORD = process.env.MLAB_PASSWORD || config.MLAB_PASSWORD;
 
 
 mongoose.Promise = global.Promise;
