@@ -86,15 +86,16 @@ class PropertySearch extends Component {
     const { context: { user } } = this.props;
     const { bathrooms, bedrooms, zestimate } = estate;
     event.preventDefault();
+    console.log(user);
 
-    if (!user) {
+    if (Object.keys(user).length === 0) {
       history.push({
         pathname: '/login',
         state: 'You must log in before you can save properties',
       });
     }
 
-    axios.post('/saveProperty', { bathrooms, bedrooms, zestimate: zestimate.amount, address })
+    axios.post('/api/user/saveProperty', { bathrooms, bedrooms, zestimate: zestimate.amount, address })
       .then(response => {
         if (response.data === 'Property successfully saved' || 'Property already saved!') {
           // Set timeout to display a quick toast?
