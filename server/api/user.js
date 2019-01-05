@@ -60,7 +60,7 @@ router.post('/saveProperty', (req, res) => {
         res.json('Property already saved!');
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log('ERROR ERROR', err));
 });
 
 
