@@ -52,5 +52,6 @@
   ],
   "engines": {
     "node": "8.11.1"
-  }
+  },
+  "homepage": "https://salty-inlet-46474.herokuapp.com/"
 }
