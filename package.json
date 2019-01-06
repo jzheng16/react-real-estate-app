@@ -43,8 +43,13 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "jest": "jest --coverage __tests__/*"
+    "jest": "jest --coverage __tests__/*",
+    "testing": "react-scripts start",
+    "testing1": "nodemon server/index.js"
   },
+
+  "proxy": "http://localhost:3001",
+
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -53,6 +58,5 @@
   ],
   "engines": {
     "node": "8.11.1"
-  },
-  "homepage": "https://salty-inlet-46474.herokuapp.com/"
+
 }

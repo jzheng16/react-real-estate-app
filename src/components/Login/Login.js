@@ -13,6 +13,10 @@ class Login extends Component {
     this.state = { email: '', password: '', error: '' };
   }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -38,8 +42,16 @@ class Login extends Component {
   render() {
     // Destructuring the error property off of this.state
     const { error } = this.state;
+
     return (
       <div className="loginContainer">
+
+        {/* Will display a message if user was redirected here */}
+        {this.props.history.location.state
+          && <div className="redirect-message"> {this.props.history.location.state} </div>
+        }
+
+
         {/* ternary expression down below: if error, show error, otherwise, show null (nothing) */}
         <form id="Login" onSubmit={this.loggingIn}>
           {error ? <div id="error-msg">{error}</div> : null}

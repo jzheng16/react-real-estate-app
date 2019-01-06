@@ -14,7 +14,7 @@ const db = require('./db/index.js');
 const User = require('./db/models/user');
 
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3001;
 
 // Connect to our database
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
