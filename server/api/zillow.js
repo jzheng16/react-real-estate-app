@@ -2,7 +2,8 @@ const router = require('express').Router();
 const axios = require('axios');
 
 
-const API_KEY = config.ZILLOW_API_KEY;
+
+const API_KEY = process.env.ZILLOW_API_KEY || require('../../config').ZILLOW_API_KEY;
 
 
 
