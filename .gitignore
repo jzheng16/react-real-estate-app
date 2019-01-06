@@ -24,4 +24,7 @@ yarn-error.log*
 # Config
 config.js
 
+#Client
+/client/node_modules
+
 

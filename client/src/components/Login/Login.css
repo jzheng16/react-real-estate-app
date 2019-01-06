@@ -2,6 +2,13 @@
   min-height: 100vh;
   position: relative; }
 
+.redirect-message {
+  text-align: center;
+  margin: 0 auto;
+  color: blue;
+  font-style: italic;
+  font-size: 1.5em; }
+
 #Login {
   position: absolute;
   top: 30%;

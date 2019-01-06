@@ -1,0 +1,41 @@
+{
+  "name": "react-real-estate-app",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "^2.1.2",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-flowtype": "^3.2.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1"
+  },
+  "dependencies": {
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-google-maps": "^9.4.5",
+    "react-router-dom": "^4.3.1",
+    "google-map-react": "^1.0.9",
+    "recompose": "^0.30.0",
+    "shortid": "^2.2.14",
+    "xml-js": "^1.6.8",
+    "axios": "^0.18.0",
+    "history": "^4.7.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:5000/",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "engines": {
+    "node": "8.11.1"
+  }
+}

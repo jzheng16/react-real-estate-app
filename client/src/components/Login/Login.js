@@ -32,7 +32,7 @@ class Login extends Component {
           login(response.data);
 
           // redirecting user to UserSavedProperties page - later to saved properties
-          history.push('/usersavedproperties');
+          history.push('/savedproperties');
         } else {
           this.setState({ error: response.data });
         }

@@ -14,7 +14,7 @@ const db = require('./db/index.js');
 const User = require('./db/models/user');
 
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5000;
 
 // Connect to our database
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -54,11 +54,24 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// API Routes
+app.use('/api', require('./api'));
+
 // Cors allows us to get resources from other servers
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+
+  // Handle React routing, return all requests to React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
 
 
-app.use('/api', require('./api'));
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
