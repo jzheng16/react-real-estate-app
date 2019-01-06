@@ -26,5 +26,6 @@ config.js
 
 #Client
 /client/node_modules
+/client/build
 
 
