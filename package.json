@@ -24,7 +24,6 @@
     "xml-js": "^1.6.8"
   },
   "scripts": {
-
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "client": "cd client && npm run start",
@@ -44,5 +43,3 @@
   },
   "homepage": "https://github.com/jzheng16/react-real-estate-app#readme"
 }
-
-
