@@ -93,18 +93,18 @@ class PropertySearch extends Component {
         pathname: '/login',
         state: 'You must log in before you can save properties',
       });
+    } else {
+      axios.post('/api/user/saveProperty', { bathrooms, bedrooms, zestimate: zestimate.amount, address })
+        .then(response => {
+          if (response.data === 'Property successfully saved' || 'Property already saved!') {
+            // Set timeout to display a quick toast?
+            this.setState({ message: response.data });
+          } else {
+            this.setState({ message: 'Something went wrong' });
+          }
+        })
+        .catch(err => console.log('error', err));
     }
-
-    axios.post('/api/user/saveProperty', { bathrooms, bedrooms, zestimate: zestimate.amount, address })
-      .then(response => {
-        if (response.data === 'Property successfully saved' || 'Property already saved!') {
-          // Set timeout to display a quick toast?
-          this.setState({ message: response.data });
-        } else {
-          this.setState({ message: 'Something went wrong' });
-        }
-      })
-      .catch(err => console.log('error', err));
   }
 
   render() {
@@ -156,7 +156,7 @@ class PropertySearch extends Component {
               </div>
             </div>
           )
-          : null
+          : <div className="propertySearch-main-message"> Search an address to get started </div>
 
         }
         {Object.keys(estate).length !== 0

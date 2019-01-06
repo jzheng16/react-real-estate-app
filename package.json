@@ -41,9 +41,11 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "jest": "jest --coverage __tests__/*"
+    "jest": "jest --coverage __tests__/*",
+    "testing": "react-scripts start",
+    "testing1": "nodemon server/index.js"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:3001",
   "browserslist": [
     ">0.2%",
     "not dead",
