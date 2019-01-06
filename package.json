@@ -21,6 +21,7 @@
     "express-session": "^1.15.6",
     "google-map-react": "^1.0.9",
     "history": "^4.7.2",
+    "http-proxy-middleware": "^0.19.1",
     "mongoose": "^5.3.13",
     "node-sass-chokidar": "^1.3.4",
     "nodemailer": "^4.7.0",
@@ -35,7 +36,8 @@
     "xml-js": "^1.6.8"
   },
   "scripts": {
-    "start": "concurrently --kill-others \"nodemon server/index.js\" \"react-scripts start\"",
+    "start": "concurrently --kill-others \"node server/index.js\" \"react-scripts start\"",
+    "start-dev": "concurrently --kill-others \"nodemon server/index.js\" \"react-scripts start\"",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "build": "react-scripts build",
@@ -45,7 +47,9 @@
     "testing": "react-scripts start",
     "testing1": "nodemon server/index.js"
   },
+
   "proxy": "http://localhost:3001",
+
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -54,5 +58,5 @@
   ],
   "engines": {
     "node": "8.11.1"
-  }
+
 }
